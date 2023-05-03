@@ -1,0 +1,60 @@
+@startuml PlatformUM
+
+'''Diagrama de clases de una aplicacion que brinda servicios de viajes'''
+
+class Main {
+    - services: string[]
+    + searchCities(): void
+    + buildTrip(): void
+    + logIn(): void
+    + logOut(): void
+    + registerUser(): void
+    + showProfile(): void
+    + showReservation(): void
+}
+
+class User {
+    - name: string
+    - email: string
+    - password: string
+    - trips: Trip[]
+    + logIn(): void
+    + logOut(): void
+    + registerUser(): void
+    + showProfile(): void
+    + showReservation(): void
+}
+
+class Trip {
+    - origin: string
+    - destination: string
+    - date: Date
+    - price: number
+    - duration: number
+    - passengers: number[]
+    + searchCities(): void
+    + buildTrip(): void
+    + calculatePrice(): void
+}
+
+class City {
+    - name: string
+    - trips: Trip[]
+}
+
+class Reservation {
+    - user: User
+    - trip: Trip
+    - date: Date
+    - price: number
+    - passengers: Passenger[]
+}
+
+class Passenger {
+    - name: string
+    - age: number
+    - reservation: Reservation
+    - passenger_number: number
+}
+
+@enduml
