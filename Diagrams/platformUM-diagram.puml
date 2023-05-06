@@ -2,44 +2,38 @@
 
 '''Diagrama de clases de una aplicacion que brinda servicios de viajes'''
 
-class Main {
-    - services: string[]
-    + searchCities(): void
-    + buildTrip(): void
-    + logIn(): void
-    + logOut(): void
-    + registerUser(): void
-    + showProfile(): void
-    + showReservation(): void
-}
-
 class User {
-    - name: string
+    - username: string
     - email: string
     - password: string
-    - trips: Trip[]
+    - telephone: number
+    - isAdmin: boolean
+    - reservations: Reservation[]
     + logIn(): void
     + logOut(): void
     + registerUser(): void
+    + validateUser(): void
     + showProfile(): void
     + showReservation(): void
 }
 
 class Trip {
-    - origin: string
-    - destination: string
-    - date: Date
+    - origin: City
+    - destination: City
+    - date: Datetime
     - price: number
-    - duration: number
-    - passengers: number[]
-    + searchCities(): void
-    + buildTrip(): void
-    + calculatePrice(): void
+    - durationTravel: number
+    - distance: number
+    - totalPassengers: Passenger[]
+    - totalSeats: number
+    + checkSeats(): number
+    + calculatePrice(): number
+    + makeReservation(): void
 }
 
 class City {
     - name: string
-    - trips: Trip[]
+    - state: string
 }
 
 class Reservation {
@@ -51,10 +45,18 @@ class Reservation {
 }
 
 class Passenger {
-    - name: string
-    - age: number
+    - fullName: string
+    - dateBirth: Date
+    - nid: number
+    - gender: string
     - reservation: Reservation
-    - passenger_number: number
+    - seatNumber: number
 }
+
+City -r-> Trip
+Passenger --r--> Reservation
+Passenger -u-> Trip
+Reservation -u-> Trip
+Reservation -u-> User
 
 @enduml
