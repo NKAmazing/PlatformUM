@@ -1,0 +1,166 @@
+openapi: 3.0.3
+info:
+  title: Swagger PlatformUM - OpenAPI 3.0
+  description: |-
+    This is a sample PlatformUM Backend Server based on the OpenAPI 3.0 specification. In the third iteration of the pet store, we've switched to the design first approach!
+    You can now help us improve the API whether it's by making changes to the definition itself or to the code.
+    That way, with time, we can improve the API in general, and expose some of the new features in OAS3.
+    
+    Some useful links:
+    - [The PlatformUM repository](https://github.com/NKAmazing/PlatformUM)
+    - [The source API definition for the PlatformUM](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+    # - url: https://petstore3.swagger.io/api/v3
+    - url: https://localhost:8500/api/v1
+tags:
+  - name: user
+    description: Everything about your Users
+    # externalDocs:
+      # description: Find out more
+      # url: http://swagger.io
+  - name: vehicle
+    description: Everything about your Vehicles
+    # externalDocs:
+      # description: Find out more about our store
+      # url: http://swagger.io
+  - name: company
+    description: Everything about your Companies
+  - name: destination
+    description: Everything about your Destinations
+  - name: trip
+    description: Everything about your Trips
+  - name: reservation
+    description: Everything about your Reservations
+  - name: city
+    description: Everything about your Cities
+  - name: passenger
+    description: Everything about your Passengers
+paths:
+  /user:
+    put:
+      tags:
+        - user
+      summary: Update an existing user
+      description: Update an existing user by Id
+      operationId: updateUser
+      requestBody:
+        description: Update an existent user in database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User''          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: User not found
+        '405':
+          description: Validation exception
+      security:
+        - platformUM_auth:
+            - write:users
+            - read:users
+    post:
+      tags:
+        - user
+      summary: Add a new user into database
+      description: Add a new user into database
+      operationId: addUser
+      requestBody:
+        description: Create a new user in database
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+        '405':
+          description: Invalid input
+      security:
+        - platformUM_auth:
+            - write:users
+            - read:users
+  /user/findByStatus:
+    get:
+      tags:
+        - user
+      summary: Finds Users by status
+      description: Multiple status values can be provided with comma separated strings
+      operationId: findsersByStatus
+      parameters:
+        - name: status
+          in: query
+          description: Status values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: available
+            enum:
+              - available
+              - pending
+              - sold
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'          
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid status value
+      security:
+        - platformUM_auth:
+            - write:users
+            - read:users
+  /user/findByTags:
+    get:
+      
