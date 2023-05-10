@@ -17,31 +17,48 @@ class User {
     + showReservation(): void
 }
 
-class Trip {
+' Agregar los datos del colectivo a parte
+class Vehicle {
+    - name : string
+    - type: string 'bus, traffic, etc'
+    - seats: number
+}
+
+' *Agreagar datos de empresa de viajes
+class Company {
+    - name: string
+    - vehicles: Vehicle[]
+}
+
+class Destination {
     - origin: City
     - destination: City
     - date: Datetime
-    - price: number
-    - durationTravel: number
+    - travelDuration: number
     - distance: number
-    - totalPassengers: Passenger[]
-    - totalSeats: number
-    + checkSeats(): number
-    + calculatePrice(): number
-    + makeReservation(): void
 }
 
-class City {
-    - name: string
-    - state: string
+class Trip {
+    - destination: Destination
+    - reservations: Reservation[]
+    - company: Company
+    + makeReservation(): void
+    + calculatePrice(): number
+    + checkSeats(): number
 }
 
 class Reservation {
     - user: User
     - trip: Trip
-    - date: Date
+    - status: string
+    - date: Datetime
     - price: number
     - passengers: Passenger[]
+}
+
+class City {
+    - name: string
+    - state: string
 }
 
 class Passenger {
@@ -53,10 +70,13 @@ class Passenger {
     - seatNumber: number
 }
 
-City -r-> Trip
+City -r-> Destination
+Destination -r-> Trip
 Passenger --r--> Reservation
 Passenger -u-> Trip
-Reservation -u-> Trip
-Reservation -u-> User
-
+Reservation -d-> Trip
+Reservation -d-> User
+Vehicle -u-> Company
+Company -u-> Trip
+ 
 @enduml
