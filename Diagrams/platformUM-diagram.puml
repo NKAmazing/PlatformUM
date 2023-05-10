@@ -1,6 +1,6 @@
 @startuml PlatformUM
 
-'''Diagrama de clases de una aplicacion que brinda servicios de viajes'''
+''' Aplication class diagram that provides travel services'''
 
 class User {
     - username: string
@@ -17,14 +17,14 @@ class User {
     + showReservation(): void
 }
 
-' Agregar los datos del colectivo a parte
+' Add data of the vehicle
 class Vehicle {
     - name : string
     - type: string 'bus, traffic, etc'
     - seats: number
 }
 
-' *Agreagar datos de empresa de viajes
+' *Add data of the company
 class Company {
     - name: string
     - vehicles: Vehicle[]
