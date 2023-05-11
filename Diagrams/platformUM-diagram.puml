@@ -14,7 +14,9 @@ class User {
     + registerUser(): void
     + validateUser(): void
     + showProfile(): void
-    + showReservation(): void
+    + editProfile(): void
+    + showReservations(): void
+    + selectReservation(): void
 }
 
 ' Add data of the vehicle
