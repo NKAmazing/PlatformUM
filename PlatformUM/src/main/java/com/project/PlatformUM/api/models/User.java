@@ -1,4 +1,4 @@
-package com.project.PlatformUM.models;
+package com.project.PlatformUM.api.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
