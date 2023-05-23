@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import java.time.LocalDate;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class Passenger {
@@ -26,8 +27,8 @@ public class Passenger {
     @Column(nullable = false)
     private String gender;
 
-    @Column(nullable = false)
-    @OneToOne(mappedBy = "passenger")
+    @OneToOne
+    @PrimaryKeyJoinColumn
     private Reservation reservation;
 
     @Column(nullable = false)

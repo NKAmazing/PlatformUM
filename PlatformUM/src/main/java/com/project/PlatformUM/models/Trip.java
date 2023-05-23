@@ -1,19 +1,32 @@
 package com.project.PlatformUM.models;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+
+import java.util.Set;
+import java.util.HashSet;
 
 @Entity
 public class Trip {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @OneToOne(mappedBy = "trip")
+    @PrimaryKeyJoinColumn
     private Destination destination;
 
     @OneToMany(mappedBy = "trip")
-    private Reservation reservations;
+    private Set<Reservation> reservations = new HashSet<>();
 
     @OneToOne(mappedBy = "trip")
+    @PrimaryKeyJoinColumn
     private Company company;
 
 
@@ -21,7 +34,7 @@ public class Trip {
         // Empty constructor
     }
 
-    public Trip(Destination destination, Reservation reservations, Company company) {
+    public Trip(Destination destination, Set<Reservation> reservations, Company company) {
         this.destination = destination;
         this.reservations = reservations;
         this.company = company;
@@ -36,11 +49,11 @@ public class Trip {
         this.destination = destination;
     }
 
-    public Reservation getReservations() {
+    public Set<Reservation> getReservations() {
         return reservations;
     }
 
-    public void setReservations(Reservation reservations) {
+    public void setReservations(Set<Reservation> reservations) {
         this.reservations = reservations;
     }
 
