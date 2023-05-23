@@ -23,8 +23,8 @@ public class Reservation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
@@ -40,9 +40,8 @@ public class Reservation {
     @Column(nullable = false)
     private Number price;
 
-    @Column(nullable = false)
     @OneToMany(mappedBy = "reservation")
-    private Set<Passenger> passengers = new HashSet<>();
+    private Set<Passenger> passengers = new HashSet<>();    
 
     public Reservation() {
         // Empty constructor
