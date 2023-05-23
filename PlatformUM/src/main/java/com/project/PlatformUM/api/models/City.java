@@ -1,4 +1,4 @@
-package com.project.PlatformUM.models;
+package com.project.PlatformUM.api.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,7 +22,6 @@ public class City {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Destination destination;
-
 
     public City() {
         // Empty constructor

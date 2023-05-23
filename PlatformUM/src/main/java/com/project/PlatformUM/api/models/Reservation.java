@@ -1,4 +1,4 @@
-package com.project.PlatformUM.models;
+package com.project.PlatformUM.api.models;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
