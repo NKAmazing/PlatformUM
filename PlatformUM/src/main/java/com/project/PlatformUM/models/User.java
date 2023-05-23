@@ -6,7 +6,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import java.util.List;
+
+import java.util.Set;
+import java.util.HashSet;
 
 @Entity
 public class User {
@@ -30,14 +32,14 @@ public class User {
     @Column(nullable = false)
     private Boolean isAdmin;
 
-    @OneToMany(mappedBy = "user")   
-    private List<Reservation> reservations;
+    @OneToMany(mappedBy = "user")
+    private Set<Reservation> reservations = new HashSet<>();
 
     public User() {
         // Empty constructor
     }
 
-    public User(String username, String email, String password, Number telephone, Boolean isAdmin, List<Reservation> reservations) {
+    public User(String username, String email, String password, Number telephone, Boolean isAdmin, Set<Reservation> reservations) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -95,11 +97,11 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
-    public List<Reservation> getReservations() {
+    public Set<Reservation> getReservations() {
         return reservations;
     }
 
-    public void setReservations(List<Reservation> reservations) {
+    public void setReservations(Set<Reservation> reservations) {
         this.reservations = reservations;
     }
 

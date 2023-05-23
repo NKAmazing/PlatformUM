@@ -27,13 +27,13 @@ public class Company {
     private Set<Vehicle> vehicle = new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Set<Trip> trip = new HashSet<>();
+    private Trip trip;    
 
     public Company() {
         // Empty constructor
     }
 
-    public Company(String name, Set<Vehicle> vehicle, Set<Trip> trip) {
+    public Company(String name, Set<Vehicle> vehicle, Trip trip) {
         this.name = name;
         this.vehicle = vehicle;
     }
@@ -63,11 +63,11 @@ public class Company {
         this.vehicle = vehicle;
     }
 
-    public Set<Trip> getTrip() {
+    public Trip getTrip() {
         return trip;
     }
 
-    public void setTrip(Set<Trip> trip) {
+    public void setTrip(Trip trip) {
         this.trip = trip;
     }
 }

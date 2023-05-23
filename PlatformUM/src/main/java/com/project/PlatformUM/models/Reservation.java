@@ -13,6 +13,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Reservation {
@@ -25,8 +27,8 @@ public class Reservation {
     @PrimaryKeyJoinColumn
     private User user;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
+    @ManyToOne
+    @JoinColumn(name = "trip_id")
     private Trip trip;
 
     @Column(nullable = false)
