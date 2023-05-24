@@ -2,6 +2,8 @@ package com.project.PlatformUM.api.models;
 
 import java.time.LocalDateTime;
 
+import org.springframework.cglib.core.Local;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,22 +31,18 @@ public class Destination {
     private LocalDateTime date;
 
     @Column(nullable = false)
-    private Number travelDuration;
+    private Float travelDuration;
 
     @Column(nullable = false)
-    private Number distance;
+    private Float distance;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Trip trip;
 
-    public Destination() {
-        // Empty constructor
-    }
-
-    public Destination(City origin, City destination, LocalDateTime date, Number travelDuration, Number distance, Trip trip) {
+    public Destination(City origin, City destination, Float travelDuration, Float distance, Trip trip) {
         this.origin = origin;
         this.destination = destination;
-        this.date = date;
+        this.date = LocalDateTime.now();
         this.travelDuration = travelDuration;
         this.distance = distance;
         this.trip = trip;
@@ -71,23 +69,23 @@ public class Destination {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setDate() {
+        this.date = LocalDateTime.now();
     }
 
-    public Number getTravelDuration() {
+    public Float getTravelDuration() {
         return travelDuration;
     }
 
-    public void setTravelDuration(Number travelDuration) {
+    public void setTravelDuration(Float travelDuration) {
         this.travelDuration = travelDuration;
     }
 
-    public Number getDistance() {
+    public Float getDistance() {
         return distance;
     }
 
-    public void setDistance(Number distance) {
+    public void setDistance(Float distance) {
         this.distance = distance;
     }
 

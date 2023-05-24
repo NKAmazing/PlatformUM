@@ -6,9 +6,10 @@ import com.project.PlatformUM.api.services.DestinationService;
 import com.project.PlatformUM.api.models.Destination;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/destination")
+@RequestMapping("/api/destinations")
 public class DestinationController {
 
     @Autowired
@@ -16,11 +17,11 @@ public class DestinationController {
 
     @GetMapping
     public List<Destination> getDestinations() {
-        return this.destinationService.getAll();
+        return this.destinationService.getDestinations();
     }
 
     @GetMapping("/{id}")
-    public Destination getDestination(@PathVariable("id") Long id) {
+    public Optional<Destination> getDestination(@PathVariable("id") Long id) {
         return this.destinationService.getById(id);
     }
 
@@ -29,13 +30,19 @@ public class DestinationController {
         return this.destinationService.create(destination);
     }
 
-    /*@PutMapping("/{id}")
+    @PutMapping("/{id}")
     public Destination updateDestination(@PathVariable("id") Long id, @RequestBody Destination destination) {
-        return destinationService.update(id, destination);
-    }*/
+        return this.destinationService.updateById(destination, id);
+    }
 
     @DeleteMapping("/{id}")
-    public void deleteDestination(@PathVariable("id") Long id) {
-        this.destinationService.delete(id);
+    public String deleteDestination(@PathVariable("id") Long id) {
+        boolean isDeleted = this.destinationService.deleteDestination(id);
+
+        if (isDeleted) {
+            return "City with id " + id + " was deleted.";
+        } else {
+            return "City with id " + id + " was not deleted.";
+        }
     }
 }

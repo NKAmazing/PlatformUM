@@ -6,6 +6,7 @@ import com.project.PlatformUM.api.services.CityService;
 import com.project.PlatformUM.api.models.City;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/cities")
@@ -16,11 +17,11 @@ public class CityController {
 
     @GetMapping
     public List<City> getCities() {
-        return this.cityService.getAll();
+        return this.cityService.getCities();
     }
 
     @GetMapping("/{id}")
-    public City getCity(@PathVariable("id") Long id) {
+    public Optional<City> getCity(@PathVariable("id") Long id) {
         return this.cityService.getById(id);
     }
 
@@ -29,13 +30,19 @@ public class CityController {
         return this.cityService.create(city);
     }
 
-    /*@PutMapping("/{id}")
+    @PutMapping("/{id}")
     public City updateCity(@PathVariable("id") Long id, @RequestBody City city) {
-        return cityService.update(id, city);
-    }*/
+        return this.cityService.updateById(city, id);
+    }
 
     @DeleteMapping("/{id}")
-    public void deleteCity(@PathVariable("id") Long id) {
-        this.cityService.delete(id);
+    public String deleteCity(@PathVariable("id") Long id) {
+        boolean isDeleted = this.cityService.deleteCity(id);
+
+        if (isDeleted) {
+            return "City with id " + id + " was deleted.";
+        } else {
+            return "City with id " + id + " was not deleted.";
+        }
     }
 }

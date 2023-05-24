@@ -6,8 +6,10 @@ import com.project.PlatformUM.api.services.PassengerService;
 import com.project.PlatformUM.api.models.Passenger;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/passengers")
 public class PassengerController {
 
     @Autowired
@@ -15,11 +17,11 @@ public class PassengerController {
 
     @GetMapping
     public List<Passenger> getPassengers() {
-        return this.passengerService.getAll();
+        return this.passengerService.getPassengers();
     }
 
     @GetMapping("/{id}")
-    public Passenger getPassenger(@PathVariable("id") Long id) {
+    public Optional<Passenger> getPassenger(@PathVariable("id") Long id) {
         return this.passengerService.getById(id);
     }
 
@@ -28,13 +30,19 @@ public class PassengerController {
         return this.passengerService.create(passenger);
     }
 
-    /*@PutMapping("/{id}")
+    @PutMapping("/{id}")
     public Passenger updatePassenger(@PathVariable("id") Long id, @RequestBody Passenger passenger) {
-        return passengerService.update(id, passenger);
-    }*/
+        return this.passengerService.updateById(passenger, id);
+    }
 
     @DeleteMapping("/{id}")
-    public void deletePassenger(@PathVariable("id") Long id) {
-        this.passengerService.delete(id);
+    public String deletePassenger(@PathVariable("id") Long id) {
+        boolean isDeleted = this.passengerService.deletePassenger(id);
+
+        if (isDeleted) {
+            return "City with id " + id + " was deleted.";
+        } else {
+            return "City with id " + id + " was not deleted.";
+        }
     }
 }

@@ -6,8 +6,10 @@ import com.project.PlatformUM.api.services.VehicleService;
 import com.project.PlatformUM.api.models.Vehicle;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/vehicles")
 public class VehicleController {
 
     @Autowired
@@ -15,11 +17,11 @@ public class VehicleController {
 
     @GetMapping
     public List<Vehicle> getVehicles() {
-        return this.vehicleService.getAll();
+        return this.vehicleService.getVehicles();
     }
 
     @GetMapping("/{id}")
-    public Vehicle getVehicle(@PathVariable("id") Long id) {
+    public Optional<Vehicle> getVehicle(@PathVariable("id") Long id) {
         return this.vehicleService.getById(id);
     }
 
@@ -28,13 +30,19 @@ public class VehicleController {
         return this.vehicleService.create(vehicle);
     }
 
-    /*@PutMapping("/{id}")
+    @PutMapping("/{id}")
     public Vehicle updateVehicle(@PathVariable("id") Long id, @RequestBody Vehicle vehicle) {
-        return vehicleService.update(id, vehicle);
-    }*/
+        return this.vehicleService.updateById(vehicle, id);
+    }
 
     @DeleteMapping("/{id}")
-    public void deleteVehicle(@PathVariable("id") Long id) {
-        this.vehicleService.delete(id);
+    public String deleteVehicle(@PathVariable("id") Long id) {
+        boolean isDeleted = this.vehicleService.deleteVehicle(id);
+
+        if (isDeleted) {
+            return "City with id " + id + " was deleted.";
+        } else {
+            return "City with id " + id + " was not deleted.";
+        }
     }
 }

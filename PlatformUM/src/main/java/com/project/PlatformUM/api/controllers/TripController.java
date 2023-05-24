@@ -6,8 +6,10 @@ import com.project.PlatformUM.api.services.TripService;
 import com.project.PlatformUM.api.models.Trip;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/trips")
 public class TripController {
 
     @Autowired
@@ -15,11 +17,11 @@ public class TripController {
 
     @GetMapping
     public List<Trip> getTrips() {
-        return this.tripService.getAll();
+        return this.tripService.getTrips();
     }
 
     @GetMapping("/{id}")
-    public Trip getTrip(@PathVariable("id") Long id) {
+    public Optional<Trip> getTrip(@PathVariable("id") Long id) {
         return this.tripService.getById(id);
     }
 
@@ -28,13 +30,19 @@ public class TripController {
         return this.tripService.create(trip);
     }
 
-    /*@PutMapping("/{id}")
+    @PutMapping("/{id}")
     public Trip updateTrip(@PathVariable("id") Long id, @RequestBody Trip trip) {
-        return tripService.update(id, trip);
-    }*/
+        return this.tripService.updateById(trip, id);
+    }
 
     @DeleteMapping("/{id}")
-    public void deleteTrip(@PathVariable("id") Long id) {
-        this.tripService.delete(id);
+    public String deleteTrip(@PathVariable("id") Long id) {
+        boolean isDeleted = this.tripService.deleteTrip(id);
+
+        if (isDeleted) {
+            return "City with id " + id + " was deleted.";
+        } else {
+            return "City with id " + id + " was not deleted.";
+        }
     }
 }

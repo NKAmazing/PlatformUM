@@ -6,8 +6,10 @@ import com.project.PlatformUM.api.services.ReservationService;
 import com.project.PlatformUM.api.models.Reservation;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/reservations")
 public class ReservationController {
 
     @Autowired
@@ -15,11 +17,11 @@ public class ReservationController {
 
     @GetMapping
     public List<Reservation> getReservations() {
-        return this.reservationService.getAll();
+        return this.reservationService.getReservations();
     }
 
     @GetMapping("/{id}")
-    public Reservation getReservation(@PathVariable("id") Long id) {
+    public Optional<Reservation> getReservation(@PathVariable("id") Long id) {
         return this.reservationService.getById(id);
     }
 
@@ -28,13 +30,19 @@ public class ReservationController {
         return this.reservationService.create(reservation);
     }
 
-    /*@PutMapping("/{id}")
+    @PutMapping("/{id}")
     public Reservation updateReservation(@PathVariable("id") Long id, @RequestBody Reservation reservation) {
-        return reservationService.update(id, reservation);
-    }*/
+        return this.reservationService.updateById(reservation, id);
+    }
 
     @DeleteMapping("/{id}")
-    public void deleteReservation(@PathVariable("id") Long id) {
-        this.reservationService.delete(id);
+    public String deleteReservation(@PathVariable("id") Long id) {
+        boolean isDeleted = this.reservationService.deleteReservation(id);
+
+        if (isDeleted) {
+            return "City with id " + id + " was deleted.";
+        } else {
+            return "City with id " + id + " was not deleted.";
+        }
     }
 }

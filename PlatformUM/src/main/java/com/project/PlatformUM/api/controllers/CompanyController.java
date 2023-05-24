@@ -6,6 +6,7 @@ import com.project.PlatformUM.api.services.CompanyService;
 import com.project.PlatformUM.api.models.Company;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/companies")
@@ -16,11 +17,11 @@ public class CompanyController {
 
     @GetMapping
     public List<Company> getCompanies() {
-        return this.companyService.getAll();
+        return this.companyService.getCompanies();
     }
 
     @GetMapping("/{id}")
-    public Company getCompany(@PathVariable("id") Long id) {
+    public Optional<Company> getCompany(@PathVariable("id") Long id) {
         return this.companyService.getById(id);
     }
 
@@ -29,13 +30,19 @@ public class CompanyController {
         return this.companyService.create(company);
     }
 
-    /*@PutMapping("/{id}")
+    @PutMapping("/{id}")
     public Company updateCompany(@PathVariable("id") Long id, @RequestBody Company company) {
-        return companyService.update(id, company);
-    }*/
+        return this.companyService.updateById(company, id);
+    }
 
     @DeleteMapping("/{id}")
-    public void deleteCompany(@PathVariable("id") Long id) {
-        this.companyService.delete(id);
+    public String deleteCompany(@PathVariable("id") Long id) {
+        boolean isDeleted = this.companyService.deleteCompany(id);
+
+        if (isDeleted) {
+            return "City with id " + id + " was deleted.";
+        } else {
+            return "City with id " + id + " was not deleted.";
+        }
     }
 }
