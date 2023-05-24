@@ -1,48 +1,59 @@
 package com.project.PlatformUM.api.services;
 
 import com.project.PlatformUM.api.models.User;
+import com.project.PlatformUM.api.repositories.IUserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional; //Devuelve nulo o algo.
 import java.util.ArrayList;
-import java.util.List;
 
 
 @Service
-public class UserService implements IService<User>{
+public class UserService {
     
-    public UserService() {
+    @Autowired
+    IUserRepository userRepository;
+
+    public ArrayList<User> getUsers() {
+        return (ArrayList<User>) userRepository.findAll();
     }
 
-    @Override
-    public List<User> getAll() {
-        return new ArrayList<User>();
+    public Optional<User> getById(Long id) {
+        return userRepository.findById(id);
     }
 
-    @Override
-    public User getById(Long id) {
-        return new User();
-    }
-
-    @Override
     public User create(User user) {
-        return new User();
+        return userRepository.save(user);
     }
 
-    @Override
-    public User update(User user) {
-        return new User();
+    //! Verificar si se necesitan todos los campos
+    public User updateById(User request, Long id){
+        User user = userRepository.findById(id).get();
+
+        user.setUsername(request.getUsername());
+        user.setPassword(request.getPassword());
+        user.setEmail(request.getEmail());
+        user.setTelephone(request.getTelephone());
+
+        return user;
     }
 
-    @Override
-    public void delete(Long id) {
+    public Boolean deleteUser (Long id) {
+        try {
+            userRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public User getByEmail(String email) {
-        return new User();
+        return userRepository.findByEmail(email);
     }
 
     public User getByUsername(String username) {
-        return new User();
+        return userRepository.findByUsername(username);
     }
     
 }

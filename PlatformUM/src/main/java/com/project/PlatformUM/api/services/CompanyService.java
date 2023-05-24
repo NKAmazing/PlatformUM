@@ -1,40 +1,47 @@
 package com.project.PlatformUM.api.services;
 
 import com.project.PlatformUM.api.models.Company;
+import com.project.PlatformUM.api.repositories.ICompanyRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional; //Devuelve nulo o algo.
 import java.util.ArrayList;
-import java.util.List;
 
 
 @Service
-public class CompanyService implements IService<Company> {
+public class CompanyService {
 
-    public CompanyService() {
+    @Autowired
+    ICompanyRepository companyRepository;
+
+    public ArrayList<Company> getCompanies() {
+        return (ArrayList<Company>) companyRepository.findAll();
     }
 
-    @Override
-    public List<Company> getAll() {
-        return new ArrayList<Company>();
+    public Optional<Company> getById(Long id) {
+        return companyRepository.findById(id);
     }
 
-    @Override
-    public Company getById(Long id) {
-        return new Company();
-    }
-
-    @Override
     public Company create(Company company) {
-        return new Company();
+        return companyRepository.save(company);
     }
 
-    @Override
-    public Company update(Company company) {
-        return new Company();
+    public Company updateById(Company request, Long id){
+        Company company = companyRepository.findById(id).get();
+
+        company.setName(request.getName());
+
+        return company;
     }
 
-    @Override
-    public void delete(Long id) {
+    public Boolean deleteCompany (Long id) {
+        try {
+            companyRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

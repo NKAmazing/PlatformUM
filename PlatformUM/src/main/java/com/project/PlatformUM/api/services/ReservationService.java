@@ -1,40 +1,49 @@
 package com.project.PlatformUM.api.services;
 
 import com.project.PlatformUM.api.models.Reservation;
+import com.project.PlatformUM.api.repositories.IReservationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional; //Devuelve nulo o algo.
 import java.util.ArrayList;
-import java.util.List;
 
 
 @Service
-public class ReservationService implements IService<Reservation>{
+public class ReservationService {
 
-    public ReservationService() {
+    @Autowired
+    IReservationRepository reservationRepository;
+
+    public ArrayList<Reservation> getReservations() {
+        return (ArrayList<Reservation>) reservationRepository.findAll();
     }
 
-    @Override
-    public List<Reservation> getAll() {
-        return new ArrayList<Reservation>();
+    public Optional<Reservation> getById(Long id) {
+        return reservationRepository.findById(id);
     }
 
-    @Override
-    public Reservation getById(Long id) {
-        return new Reservation();
-    }
-
-    @Override
     public Reservation create(Reservation reservation) {
-        return new Reservation();
+        return reservationRepository.save(reservation);
     }
 
-    @Override
-    public Reservation update(Reservation reservation) {
-        return new Reservation();
+    //! Ver si se puede hacer un update de todos los campos.
+    public Reservation updateById(Reservation request, Long id){
+        Reservation reservation = reservationRepository.findById(id).get();
+
+        reservation.setUser(request.getUser());
+        reservation.setPrice(request.getPrice());
+
+        return reservation;
     }
 
-    @Override
-    public void delete(Long id) {
+    public Boolean deleteReservation (Long id) {
+        try {
+            reservationRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
     
 }

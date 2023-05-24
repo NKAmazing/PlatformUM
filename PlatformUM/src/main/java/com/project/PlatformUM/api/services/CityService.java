@@ -1,40 +1,46 @@
 package com.project.PlatformUM.api.services;
 
 import com.project.PlatformUM.api.models.City;
+import com.project.PlatformUM.api.repositories.ICityRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional; //Devuelve nulo o algo.
 import java.util.ArrayList;
-import java.util.List;
 
 
 @Service
-public class CityService implements IService<City>{
+public class CityService {
     
-    public CityService() {
+    @Autowired
+    ICityRepository cityRepository;
+
+    public ArrayList<City> getCities() {
+        return (ArrayList<City>) cityRepository.findAll();
     }
 
-    @Override
-    public List<City> getAll() {
-        return new ArrayList<City>();
+    public Optional<City> getById(Long id) {
+        return cityRepository.findById(id);
     }
 
-    @Override
-    public City getById(Long id) {
-        return new City();
-    }
-
-    @Override
     public City create(City city) {
-        return new City();
+        return cityRepository.save(city);
     }
 
-    @Override
-    public City update(City city) {
-        return new City();
+    public City updateById(City request, Long id){
+        City city = cityRepository.findById(id).get();
+
+        city.setName(request.getName());
+
+        return city;
     }
 
-    @Override
-    public void delete(Long id) {
+    public Boolean deleteCity (Long id) {
+        try {
+            cityRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
-
 }

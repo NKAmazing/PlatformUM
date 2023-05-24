@@ -1,40 +1,48 @@
 package com.project.PlatformUM.api.services;
 
 import com.project.PlatformUM.api.models.Vehicle;
+import com.project.PlatformUM.api.repositories.IVehicleRepository;
+import org.intellij.lang.annotations.JdkConstants.AdjustableOrientation;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.ArrayList;
-import java.util.List;
 
 
 @Service
-public class VehicleService implements IService<Vehicle>{
+public class VehicleService {
     
-    public VehicleService() {
+    @AdjustableOrientation
+    IVehicleRepository vehicleRepository;
+
+    public ArrayList<Vehicle> getVehicles() {
+        return (ArrayList<Vehicle>) vehicleRepository.findAll();
     }
 
-    @Override
-    public List<Vehicle> getAll() {
-        return new ArrayList<Vehicle>();
+    public Optional<Vehicle> getById(Long id) {
+        return vehicleRepository.findById(id);
     }
 
-    @Override
-    public Vehicle getById(Long id) {
-        return new Vehicle();
-    }
-
-    @Override
     public Vehicle create(Vehicle vehicle) {
-        return new Vehicle();
+        return vehicleRepository.save(vehicle);
     }
 
-    @Override
-    public Vehicle update(Vehicle vehicle) {
-        return new Vehicle();
+    public Vehicle updateById(Vehicle request, Long id){
+        Vehicle vehicle = vehicleRepository.findById(id).get();
+
+        vehicle.setName(request.getName());
+        vehicle.setType(request.getType());
+
+        return vehicle;
     }
 
-    @Override
-    public void delete(Long id) {
+    public Boolean deleteVehicle (Long id) {
+        try {
+            vehicleRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
 }

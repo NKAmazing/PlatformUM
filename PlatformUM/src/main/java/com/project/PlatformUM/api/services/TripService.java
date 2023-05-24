@@ -1,39 +1,48 @@
 package com.project.PlatformUM.api.services;
 
 import com.project.PlatformUM.api.models.Trip;
+import com.project.PlatformUM.api.repositories.ITripRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional; //Devuelve nulo o algo.
 import java.util.ArrayList;
-import java.util.List;
 
 
 @Service
-public class TripService implements IService<Trip>{
+public class TripService {
     
-    public TripService() {
+    @Autowired
+    ITripRepository tripRepository;
+
+    public ArrayList<Trip> getTrips() {
+        return (ArrayList<Trip>) tripRepository.findAll();
     }
 
-    @Override
-    public List<Trip> getAll() {
-        return new ArrayList<Trip>();
+    public Optional<Trip> getById(Long id) {
+        return tripRepository.findById(id);
     }
 
-    @Override
-    public Trip getById(Long id) {
-        return new Trip();
-    }
-
-    @Override
     public Trip create(Trip trip) {
-        return new Trip();
+        return tripRepository.save(trip);
     }
 
-    @Override
-    public Trip update(Trip trip) {
-        return new Trip();
+    public Trip updateById(Trip request, Long id){
+        Trip trip = tripRepository.findById(id).get();
+
+        trip.setDestination(request.getDestination());
+        trip.setCompany(request.getCompany());
+
+        return trip;
     }
 
-    @Override
-    public void delete(Long id) {
+    public Boolean deleteTrip (Long id) {
+        try {
+            tripRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
+
 }

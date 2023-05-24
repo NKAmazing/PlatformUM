@@ -1,41 +1,49 @@
 package com.project.PlatformUM.api.services;
 
 import com.project.PlatformUM.api.models.Destination;
+import com.project.PlatformUM.api.repositories.IDestinationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional; //Devuelve nulo o algo.
 import java.util.ArrayList;
-import java.util.List;
 
 
 @Service
-public class DestinationService implements IService<Destination> {
+public class DestinationService {
 
-    public DestinationService() {
+    @Autowired
+    IDestinationRepository destinationRepository;
+
+    public ArrayList<Destination> getDestinations() {
+        return (ArrayList<Destination>) destinationRepository.findAll();
     }
 
-    @Override
-    public List<Destination> getAll() {
-        return new ArrayList<Destination>();
+    public Optional<Destination> getById(Long id) {
+        return destinationRepository.findById(id);
     }
 
-    @Override
-    public Destination getById(Long id) {
-        return new Destination();
-    }
-
-    @Override
     public Destination create(Destination destination) {
-        return new Destination();
+        return destinationRepository.save(destination);
     }
 
-    @Override
-    public Destination update(Destination destination) {
-        return new Destination();
+    //! Ver si se puede hacer un update de todos los campos.
+    public Destination updateById(Destination request, Long id){
+        Destination destination = destinationRepository.findById(id).get();
+
+        destination.setOrigin(request.getOrigin());
+        destination.setDestination(request.getDestination());
+        
+        return destination;
     }
 
-    @Override
-    public void delete(Long id) {
+    public Boolean deleteDestination (Long id) {
+        try {
+            destinationRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
-    
-    
+        
 }
