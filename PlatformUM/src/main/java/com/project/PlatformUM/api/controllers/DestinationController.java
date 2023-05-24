@@ -3,6 +3,9 @@ package com.project.PlatformUM.api.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.project.PlatformUM.api.services.DestinationService;
+import com.project.PlatformUM.api.models.Destination;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/destination")
@@ -11,28 +14,28 @@ public class DestinationController {
     @Autowired
     private DestinationService destinationService;
 
-    /*@GetMapping
+    @GetMapping
     public List<Destination> getDestinations() {
-        return destinationService.getDestinations();
+        return this.destinationService.getAll();
     }
 
     @GetMapping("/{id}")
     public Destination getDestination(@PathVariable("id") Long id) {
-        return destinationService.getDestination(id);
+        return this.destinationService.getById(id);
     }
 
     @PostMapping
     public Destination addDestination(@RequestBody Destination destination) {
-        return destinationService.addDestination(destination);
+        return this.destinationService.create(destination);
     }
 
-    @PutMapping("/{id}")
+    /*@PutMapping("/{id}")
     public Destination updateDestination(@PathVariable("id") Long id, @RequestBody Destination destination) {
-        return destinationService.updateDestination(id, destination);
-    }
+        return destinationService.update(id, destination);
+    }*/
 
     @DeleteMapping("/{id}")
     public void deleteDestination(@PathVariable("id") Long id) {
-        destinationService.deleteDestination(id);
-    }*/
+        this.destinationService.delete(id);
+    }
 }

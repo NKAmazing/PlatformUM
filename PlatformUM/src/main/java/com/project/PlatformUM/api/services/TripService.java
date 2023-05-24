@@ -36,5 +36,4 @@ public class TripService implements IService<Trip>{
     @Override
     public void delete(Long id) {
     }
-
 }

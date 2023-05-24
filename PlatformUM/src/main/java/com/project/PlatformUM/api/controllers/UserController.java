@@ -3,6 +3,9 @@ package com.project.PlatformUM.api.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.project.PlatformUM.api.services.UserService;
+import com.project.PlatformUM.api.models.User;
+
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -10,28 +13,28 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    /*@GetMapping
+    @GetMapping
     public List<User> getUsers() {
-        return userService.getUsers();
+        return this.userService.getAll();
     }
 
     @GetMapping("/{id}")
     public User getUser(@PathVariable("id") Long id) {
-        return userService.getUser(id);
+        return this.userService.getById(id);
     }
 
     @PostMapping
     public User addUser(@RequestBody User user) {
-        return userService.addUser(user);
+        return this.userService.create(user);
     }
 
-    @PutMapping("/{id}")
+    /*@PutMapping("/{id}")
     public User updateUser(@PathVariable("id") Long id, @RequestBody User user) {
-        return userService.updateUser(id, user);
-    }
+        return userService.update(id, user);
+    }*/
 
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable("id") Long id) {
-        userService.deleteUser(id);
-    }*/
+        this.userService.delete(id);
+    }
 }
