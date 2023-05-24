@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.CascadeType;
@@ -36,7 +37,7 @@ public class Destination {
     @Column(nullable = false)
     private Float distance;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "destination")
     private Trip trip;
 
     public Destination(City origin, City destination, Float travelDuration, Float distance, Trip trip) {

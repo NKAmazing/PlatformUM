@@ -2,11 +2,12 @@ package com.project.PlatformUM.api.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.CascadeType;
 
 import java.util.Set;
 import java.util.HashSet;
@@ -19,16 +20,15 @@ public class Trip {
     private Long id;
 
     @OneToOne(mappedBy = "trip")
-    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "destination_id")
     private Destination destination;
 
-    @OneToMany(mappedBy = "trip")
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
     private Set<Reservation> reservations = new HashSet<>();
 
     @OneToOne(mappedBy = "trip")
-    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "company_id")
     private Company company;
-
 
     public Trip() {
         // Empty constructor
@@ -64,5 +64,5 @@ public class Trip {
     public void setCompany(Company company) {
         this.company = company;
     }
-    
+
 }

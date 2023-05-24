@@ -26,7 +26,7 @@ public class Company {
     @OneToMany(mappedBy = "company")
     private Set<Vehicle> vehicle = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "company", cascade = CascadeType.ALL)
     private Trip trip;    
 
     public Company() {
