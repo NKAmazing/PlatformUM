@@ -95,7 +95,7 @@ public class Reservation {
     }
 
     public void setDate(LocalDateTime date) {
-        this.date = date;
+        this.date = LocalDateTime.now();
     }
 
     public Number getPrice() {
