@@ -5,7 +5,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -36,7 +36,7 @@ public class Reservation {
     private String status;
 
     @Column(nullable = false)
-    private LocalDate date;
+    private LocalDateTime date;
 
     @Column(nullable = false)
     private Number price;
@@ -48,11 +48,11 @@ public class Reservation {
         // Empty constructor
     }
 
-    public Reservation(User user, Trip trip, String status, LocalDate date, Number price, Set<Passenger> passengers) {
+    public Reservation(User user, Trip trip, String status, LocalDateTime date, Number price, Set<Passenger> passengers) {
         this.user = user;
         this.trip = trip;
         this.status = status;
-        this.date = date;
+        this.date = LocalDateTime.now();
         this.price = price;
         this.passengers = passengers;
     }
@@ -90,11 +90,11 @@ public class Reservation {
         this.status = status;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
