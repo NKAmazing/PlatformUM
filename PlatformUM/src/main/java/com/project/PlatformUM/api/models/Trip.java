@@ -19,14 +19,14 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "trip")
+    @OneToOne
     @JoinColumn(name = "destination_id")
     private Destination destination;
 
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
     private Set<Reservation> reservations = new HashSet<>();
 
-    @OneToOne(mappedBy = "trip")
+    @OneToOne
     @JoinColumn(name = "company_id")
     private Company company;
 
