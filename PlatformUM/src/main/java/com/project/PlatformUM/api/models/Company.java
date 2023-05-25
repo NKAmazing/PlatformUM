@@ -23,7 +23,7 @@ public class Company {
 
     @Column(nullable = false)
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private Set<Vehicle> vehicle = new HashSet<>();
 
     @OneToOne(mappedBy = "company", cascade = CascadeType.ALL)

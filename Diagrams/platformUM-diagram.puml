@@ -17,6 +17,7 @@ class User {
     + editProfile(): void
     + showReservations(): void
     + selectReservation(): void
+    + cancelReservation(): void
 }
 
 ' Add data of the vehicle
@@ -24,6 +25,7 @@ class Vehicle {
     - name : string
     - type: string 'bus, traffic, etc'
     - seats: number
+    - company: Company
 }
 
 ' *Add data of the company
@@ -56,11 +58,15 @@ class Reservation {
     - date: Datetime
     - price: number
     - passengers: Passenger[]
+    + addPassenger(): void
+    + savePassengerData(): void
 }
 
 class City {
     - name: string
     - state: string
+    - origin: Destination
+    - destination: Destination
 }
 
 class Passenger {

@@ -1,6 +1,7 @@
 package com.project.PlatformUM.api.models;
 
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,6 +24,7 @@ public class Vehicle {
     private Number seats;
 
     @ManyToOne
+    @JoinColumn(name = "company_id")
     private Company company;
 
     public Vehicle() {

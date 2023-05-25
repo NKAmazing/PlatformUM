@@ -5,8 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class City {
@@ -20,14 +20,17 @@ public class City {
     @Column(nullable = false)
     private String state;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "origin", cascade = CascadeType.ALL)
+    private Destination origin;
+
+    @OneToOne(mappedBy = "destination", cascade = CascadeType.ALL)
     private Destination destination;
 
     public City() {
         // Empty constructor
     }
 
-    public City(String name, String state, Destination destination) {
+    public City(String name, String state, Destination destination, Destination origin) {
         this.name = name;
         this.state = state;
         this.destination = destination;
@@ -64,5 +67,13 @@ public class City {
 
     public void setDestination(Destination destination) {
         this.destination = destination;
+    }
+
+    public Destination getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(Destination origin) {
+        this.origin = origin;
     }
 }

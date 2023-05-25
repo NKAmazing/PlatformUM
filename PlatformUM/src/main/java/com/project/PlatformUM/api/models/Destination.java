@@ -2,8 +2,6 @@ package com.project.PlatformUM.api.models;
 
 import java.time.LocalDateTime;
 
-import org.springframework.cglib.core.Local;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,8 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
-import jakarta.persistence.CascadeType;
 
 @Entity
 public class Destination {
@@ -20,12 +16,12 @@ public class Destination {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(mappedBy = "destination")
-    @PrimaryKeyJoinColumn
+    @OneToOne
+    @JoinColumn(name = "city_origin_id")
     private City origin;
 
-    @OneToOne(mappedBy = "destination")
-    @PrimaryKeyJoinColumn
+    @OneToOne
+    @JoinColumn(name = "city_destination_id")
     private City destination;
 
     @Column(nullable = false)
