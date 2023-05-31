@@ -65,8 +65,6 @@ class Reservation {
 class City {
     - name: string
     - state: string
-    - origin: Destination
-    - destination: Destination
 }
 
 class Passenger {
@@ -81,8 +79,7 @@ class Passenger {
 City -r-> Destination
 Destination -r-> Trip
 Passenger --r--> Reservation
-Passenger -u-> Trip
-Reservation -d-> Trip
+Reservation -u-> Trip
 Reservation -d-> User
 Vehicle -u-> Company
 Company -u-> Trip
