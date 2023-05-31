@@ -10,6 +10,9 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.CascadeType;
 
 import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.HashSet;
 
 @Entity
@@ -19,7 +22,7 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne()
     @JoinColumn(name = "destination_id")
     private Destination destination;
 
@@ -30,17 +33,12 @@ public class Trip {
     @JoinColumn(name = "company_id")
     private Company company;
 
-    public Trip() {
-        // Empty constructor
-    }
-
-    public Trip(Destination destination, Set<Reservation> reservations, Company company) {
-        this.destination = destination;
-        this.reservations = reservations;
-        this.company = company;
+    public Long getId() {
+        return id;
     }
 
     // Getters and setters of the class attributes
+    @JsonIgnoreProperties({"trip"})
     public Destination getDestination() {
         return destination;
     }

@@ -20,22 +20,6 @@ public class City {
     @Column(nullable = false)
     private String state;
 
-    @OneToOne(mappedBy = "origin", cascade = CascadeType.ALL)
-    private Destination origin;
-
-    @OneToOne(mappedBy = "destination", cascade = CascadeType.ALL)
-    private Destination destination;
-
-    public City() {
-        // Empty constructor
-    }
-
-    public City(String name, String state, Destination destination, Destination origin) {
-        this.name = name;
-        this.state = state;
-        this.destination = destination;
-    }
-
     // Getters and setters of the class attributes
     public Long getId() {
         return id;
@@ -59,21 +43,5 @@ public class City {
 
     public void setState(String state) {
         this.state = state;
-    }
-
-    public Destination getDestination() {
-        return destination;
-    }
-
-    public void setDestination(Destination destination) {
-        this.destination = destination;
-    }
-
-    public Destination getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(Destination origin) {
-        this.origin = origin;
     }
 }
