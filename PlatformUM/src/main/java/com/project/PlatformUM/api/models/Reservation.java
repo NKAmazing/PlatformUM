@@ -20,9 +20,17 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 @Entity
 public class Reservation {
+
+    public enum Status {
+        PENDING,
+        CONFIRMED,
+        CANCELLED
+    }
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,8 +44,9 @@ public class Reservation {
     @JoinColumn(name = "trip_id")
     private Trip trip;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String status;
+    private Status status;
 
     @Column(nullable = false)
     private LocalDateTime date;
@@ -76,11 +85,11 @@ public class Reservation {
         this.trip = trip;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 

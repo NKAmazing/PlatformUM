@@ -9,11 +9,11 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.CascadeType;
 
-import java.util.Set;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 
 @Entity
@@ -28,7 +28,7 @@ public class Trip {
     private Destination destination;
 
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
-    private Set<Reservation> reservations = new HashSet<>();
+    private List<Reservation> reservations = new ArrayList<>();
 
     @OneToOne
     @JoinColumn(name = "company_id")
@@ -38,6 +38,7 @@ public class Trip {
         return id;
     }
 
+    @JsonIgnoreProperties({"trip"})
     public Destination getDestination() {
         return destination;
     }
@@ -46,15 +47,16 @@ public class Trip {
         this.destination = destination;
     }
 
-    @JsonIgnoreProperties({"reservation"})
-    public Set<Reservation> getReservations() {
+    @JsonIgnoreProperties({"trip"})
+    public List<Reservation> getReservations() {
         return reservations;
     }
 
-    public void setReservations(Set<Reservation> reservations) {
+    public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
     }
 
+    @JsonIgnoreProperties({"trips"})
     public Company getCompany() {
         return company;
     }
