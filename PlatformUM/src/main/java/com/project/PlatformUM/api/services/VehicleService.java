@@ -34,7 +34,7 @@ public class VehicleService {
         vehicle.setName(request.getName());
         vehicle.setType(request.getType());
 
-        return vehicle;
+        return vehicleRepository.save(vehicle);
     }
 
     public Boolean deleteVehicle (Long id) {

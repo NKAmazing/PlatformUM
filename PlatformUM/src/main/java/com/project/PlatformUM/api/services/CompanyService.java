@@ -32,7 +32,7 @@ public class CompanyService {
 
         company.setName(request.getName());
 
-        return company;
+        return companyRepository.save(company);
     }
 
     public Boolean deleteCompany (Long id) {

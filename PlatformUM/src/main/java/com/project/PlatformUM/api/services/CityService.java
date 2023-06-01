@@ -32,7 +32,7 @@ public class CityService {
 
         city.setName(request.getName());
 
-        return city;
+        return cityRepository.save(city);
     }
 
     public Boolean deleteCity (Long id) {
