@@ -15,6 +15,8 @@ class User {
     + validateUser(): void
     + showProfile(): void
     + editProfile(): void
+    + searchTrips(): void
+    + makeReservation(): void
     + showReservations(): void
     + selectReservation(): void
     + cancelReservation(): void
@@ -46,7 +48,6 @@ class Trip {
     - destination: Destination
     - reservations: Reservation[]
     - company: Company
-    + makeReservation(): void
     + calculatePrice(): number
     + checkSeats(): number
 }
@@ -65,8 +66,6 @@ class Reservation {
 class City {
     - name: string
     - state: string
-    - origin: Destination
-    - destination: Destination
 }
 
 class Passenger {
@@ -81,8 +80,7 @@ class Passenger {
 City -r-> Destination
 Destination -r-> Trip
 Passenger --r--> Reservation
-Passenger -u-> Trip
-Reservation -d-> Trip
+Reservation -u-> Trip
 Reservation -d-> User
 Vehicle -u-> Company
 Company -u-> Trip
