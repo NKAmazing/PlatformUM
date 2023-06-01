@@ -38,7 +38,8 @@ public class Destination {
     @Column(nullable = false)
     private Float distance;
 
-    @OneToOne(mappedBy = "destination", cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name = "trip_id")
     private Trip trip;
 
     public Long getId() {

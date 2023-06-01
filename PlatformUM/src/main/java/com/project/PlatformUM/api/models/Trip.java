@@ -23,8 +23,7 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne()
-    @JoinColumn(name = "destination_id")
+    @OneToOne(mappedBy = "trip", cascade = CascadeType.ALL)
     private Destination destination;
 
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
