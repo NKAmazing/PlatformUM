@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class ReservationService {
 
     @Autowired
-    IReservationRepository reservationRepository;
+    private IReservationRepository reservationRepository;
 
     public ArrayList<Reservation> getReservations() {
         return (ArrayList<Reservation>) reservationRepository.findAll();

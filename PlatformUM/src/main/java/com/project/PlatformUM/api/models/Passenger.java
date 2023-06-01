@@ -6,8 +6,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import java.time.LocalDate;
+
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
+
 
 @Entity
 public class Passenger {
@@ -29,23 +31,11 @@ public class Passenger {
 
     @ManyToOne
     @JoinColumn(name = "reservation_id")
-    private Reservation reservation;    
+    private Reservation reservation;
 
     @Column(nullable = false)
     private Number seatNumber;
 
-    public Passenger() {
-        // Empty constructor
-    }
-
-    public Passenger(String fullname, LocalDate birthdate, Number nid, String gender, Reservation reservation, Number seatNumber) {
-        this.fullname = fullname;
-        this.birthdate = birthdate;
-        this.nid = nid;
-        this.gender = gender;
-        this.reservation = reservation;
-        this.seatNumber = seatNumber;
-    }
 
     // Getters and setters of the class attributes
     public Long getId() {
@@ -88,6 +78,7 @@ public class Passenger {
         this.gender  = gender;
     }
 
+    // @JsonIgnoreProperties({"passenger"})
     public Reservation getReservation() {
         return reservation;
     }

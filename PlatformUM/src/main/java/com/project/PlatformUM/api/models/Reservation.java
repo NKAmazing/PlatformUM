@@ -1,18 +1,26 @@
 package com.project.PlatformUM.api.models;
 
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
+
 
 import java.time.LocalDateTime;
-import java.util.Set;
-import java.util.HashSet;
+import java.time.format.DateTimeFormatter;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+
 
 @Entity
 public class Reservation {
@@ -38,21 +46,9 @@ public class Reservation {
     @Column(nullable = false)
     private Number price;
 
-    @OneToMany(mappedBy = "reservation")
-    private Set<Passenger> passengers = new HashSet<>();    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reservation", orphanRemoval = true)
+    private List<Passenger> passengers = new ArrayList<>();
 
-    public Reservation() {
-        // Empty constructor
-    }
-
-    public Reservation(User user, Trip trip, String status, LocalDateTime date, Number price, Set<Passenger> passengers) {
-        this.user = user;
-        this.trip = trip;
-        this.status = status;
-        this.date = LocalDateTime.now();
-        this.price = price;
-        this.passengers = passengers;
-    }
 
     // Getters and setters of the class attributes
     public Long getId() {
@@ -63,6 +59,7 @@ public class Reservation {
         this.id = id;
     }
 
+    @JsonIgnoreProperties({"reservation"})
     public User getUser() {
         return user;
     }
@@ -71,6 +68,7 @@ public class Reservation {
         this.user = user;
     }
 
+    @JsonIgnoreProperties({"reservation"})
     public Trip getTrip() {
         return trip;
     }
@@ -91,8 +89,12 @@ public class Reservation {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = LocalDateTime.now();
+    // This method is called before the object is persisted in the database
+    @PrePersist
+    public void prePersist() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String date = LocalDateTime.now().format(formatter);
+        this.date = LocalDateTime.parse(date, formatter);
     }
 
     public Number getPrice() {
@@ -103,12 +105,20 @@ public class Reservation {
         this.price = price;
     }
 
-    public Set<Passenger> getPassengers() {
+    // public Set<Passenger> getPassengers() {
+    //     return passengers;
+    // }
+
+    // public void setPassengers(Set<Passenger> passenger) {
+    //     this.passengers = passenger;
+    // }
+
+    public List<Passenger> getPassengers() {
         return passengers;
     }
 
-    public void setPassengers(Set<Passenger> passenger) {
+    public void setPassengers(List<Passenger> passenger) {
         this.passengers = passenger;
     }
-
+    
 }

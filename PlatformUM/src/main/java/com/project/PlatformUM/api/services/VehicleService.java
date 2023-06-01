@@ -3,6 +3,7 @@ package com.project.PlatformUM.api.services;
 import com.project.PlatformUM.api.models.Vehicle;
 import com.project.PlatformUM.api.repositories.IVehicleRepository;
 import org.intellij.lang.annotations.JdkConstants.AdjustableOrientation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 @Service
 public class VehicleService {
     
-    @AdjustableOrientation
+    @Autowired
     IVehicleRepository vehicleRepository;
 
     public ArrayList<Vehicle> getVehicles() {

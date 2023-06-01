@@ -4,12 +4,15 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.CascadeType;
 
 import java.util.Set;
 import java.util.HashSet;
+import java.util.List;
+
 
 @Entity
 public class User {
@@ -34,20 +37,8 @@ public class User {
     private Boolean isAdmin;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private Set<Reservation> reservations = new HashSet<>();
-
-    public User() {
-        // Empty constructor
-    }
-
-    public User(String username, String email, String password, Number telephone, Boolean isAdmin, Set<Reservation> reservations) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.telephone = telephone;
-        this.isAdmin = isAdmin;
-        this.reservations = reservations;
-    }
+    private List<Reservation> reservations;
+    
 
     // Getters and setters of the class attributes
     public Long getId() {
@@ -98,11 +89,11 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
-    public Set<Reservation> getReservations() {
+    public List<Reservation> getReservations() {
         return reservations;
     }
 
-    public void setReservations(Set<Reservation> reservations) {
+    public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
     }
 
