@@ -38,8 +38,6 @@ public class Trip {
         return id;
     }
 
-    // Getters and setters of the class attributes
-    @JsonIgnoreProperties({"trip"})
     public Destination getDestination() {
         return destination;
     }
@@ -48,6 +46,7 @@ public class Trip {
         this.destination = destination;
     }
 
+    @JsonIgnoreProperties({"reservation"})
     public Set<Reservation> getReservations() {
         return reservations;
     }

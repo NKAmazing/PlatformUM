@@ -56,4 +56,13 @@ public class Company {
     public void setVehicle(List<Vehicle> vehicle) {
         this.vehicles = vehicle;
     }
+
+    @JsonIgnoreProperties({"company"})
+    public Trip getTrip() {
+        return trip;
+    }
+
+    public void setTrip(Trip trip) {
+        this.trip = trip;
+    }
 }

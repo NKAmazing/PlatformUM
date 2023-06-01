@@ -73,6 +73,7 @@ public class Destination {
         this.distance = distance;
     }
 
+    @JsonIgnoreProperties({"reservation"})
     public Trip getTrip() {
         return trip;
     }
@@ -81,7 +82,6 @@ public class Destination {
         this.trip = trip;
     }
 
-    @JsonIgnoreProperties({"destination"})
     public City getOrigin() {
         return origin;
     }
@@ -90,7 +90,6 @@ public class Destination {
         this.origin = origin;
     }
 
-    @JsonIgnoreProperties({"destination"})
     public City getDestination() {
         return destination;
     }

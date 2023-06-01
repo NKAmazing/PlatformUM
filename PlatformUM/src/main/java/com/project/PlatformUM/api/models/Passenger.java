@@ -3,16 +3,34 @@ package com.project.PlatformUM.api.models;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.ArrayList;
 
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.JoinColumn;
-
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Passenger {
+
+    public enum Gender {
+        MALE,
+        FEMALE,
+        OTHER
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,15 +41,16 @@ public class Passenger {
     @Column(nullable = false)
     private LocalDate birthdate;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private Number nid;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String gender;
+    private Gender gender;
 
-    @ManyToOne
-    @JoinColumn(name = "reservation_id")
-    private Reservation reservation;
+    @ManyToMany
+    @JoinColumn(name = "reservation_id", nullable = false)
+    private List<Reservation> reservations = new ArrayList<>();
 
     @Column(nullable = false)
     private Number seatNumber;
@@ -58,8 +77,10 @@ public class Passenger {
         return birthdate;
     }
 
-    public void setBirthdate(LocalDate birthdate) {
-        this.birthdate = birthdate;
+    public void setBirthdate(String birthdate) {
+        // birthdate format is "dd-MM-yyyy"
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        this.birthdate = LocalDate.parse(birthdate, formatter);
     }
 
     public Number getNid() {
@@ -70,21 +91,21 @@ public class Passenger {
         this.nid = nid;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender  = gender;
     }
 
-    // @JsonIgnoreProperties({"passenger"})
-    public Reservation getReservation() {
-        return reservation;
+    @JsonIgnoreProperties({"passenger"})
+    public List<Reservation> getReservation() {
+        return reservations;
     }
 
-    public void setReservation(Reservation reservations) {
-        this.reservation = reservations;
+    public void setReservation(List<Reservation> reservations) {
+        this.reservations = reservations;
     }
 
     public Number getSeatNumber() {

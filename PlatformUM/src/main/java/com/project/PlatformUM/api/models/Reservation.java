@@ -18,9 +18,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-
 
 @Entity
 public class Reservation {
@@ -46,7 +45,7 @@ public class Reservation {
     @Column(nullable = false)
     private Number price;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "reservation", orphanRemoval = true)
+    @ManyToMany(mappedBy = "reservations", cascade = CascadeType.ALL)
     private List<Passenger> passengers = new ArrayList<>();
 
 
@@ -105,14 +104,7 @@ public class Reservation {
         this.price = price;
     }
 
-    // public Set<Passenger> getPassengers() {
-    //     return passengers;
-    // }
-
-    // public void setPassengers(Set<Passenger> passenger) {
-    //     this.passengers = passenger;
-    // }
-
+    @JsonIgnoreProperties({"reservation"})
     public List<Passenger> getPassengers() {
         return passengers;
     }
