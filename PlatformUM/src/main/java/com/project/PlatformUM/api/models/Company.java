@@ -3,13 +3,18 @@ package com.project.PlatformUM.api.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
 import jakarta.persistence.CascadeType;
 
-import java.util.Set;
-import java.util.HashSet;
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import java.util.ArrayList;
 
 @Entity
 public class Company {
@@ -21,16 +26,10 @@ public class Company {
     private String name;
 
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
-    private Set<Vehicle> vehicles = new HashSet<>();   
+    private List<Vehicle> vehicles = new ArrayList<>();   
 
-    public Company() {
-        // Empty constructor
-    }
-
-    public Company(String name, Set<Vehicle> vehicle, Trip trip) {
-        this.name = name;
-        this.vehicles = vehicle;
-    }
+    @OneToOne(mappedBy = "company", cascade = CascadeType.ALL)
+    private Trip trip;
 
     // Getters and setters of the class attributes
     public Long getId() {
@@ -49,11 +48,12 @@ public class Company {
         this.name = name;
     }
 
-    public Set<Vehicle> getVehicle() {
+    @JsonIgnoreProperties({"company"})
+    public List<Vehicle> getVehicle() {
         return vehicles;
     }
 
-    public void setVehicle(Set<Vehicle> vehicle) {
+    public void setVehicle(List<Vehicle> vehicle) {
         this.vehicles = vehicle;
     }
 }

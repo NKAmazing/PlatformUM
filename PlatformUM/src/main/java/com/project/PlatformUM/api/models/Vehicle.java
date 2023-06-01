@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
+
 @Entity
 public class Vehicle {
     @Id
@@ -21,22 +22,11 @@ public class Vehicle {
     private String type;
 
     @Column(nullable = false)
-    private Number seats;
+    private Integer seats;
 
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
-
-    public Vehicle() {
-        // Empty constructor
-    }
-
-    public Vehicle(String name, String type, Number seats, Company company) {
-        this.name = name;
-        this.type = type;
-        this.seats = seats;
-        this.company = company;
-    }
 
     // Getters and setters of the class attributes
     public Long getId() {
@@ -63,11 +53,11 @@ public class Vehicle {
         this.type = type;
     }
 
-    public Number getSeats() {
+    public Integer getSeats() {
         return seats;
     }
 
-    public void setSeats(Number seats) {
+    public void setSeats(Integer seats) {
         this.seats = seats;
     }
 
