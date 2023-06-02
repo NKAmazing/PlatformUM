@@ -28,8 +28,8 @@ public class Company {
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<Vehicle> vehicles = new ArrayList<>();   
 
-    @OneToOne(mappedBy = "company", cascade = CascadeType.ALL)
-    private Trip trip;
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    private List<Trip> trips = new ArrayList<>();
 
     // Getters and setters of the class attributes
     public Long getId() {
@@ -58,11 +58,11 @@ public class Company {
     }
 
     @JsonIgnoreProperties({"company"})
-    public Trip getTrip() {
-        return trip;
+    public List<Trip> getTrip() {
+        return trips;
     }
 
-    public void setTrip(Trip trip) {
-        this.trip = trip;
+    public void setTrip(List<Trip> trip) {
+        this.trips = trip;
     }
 }

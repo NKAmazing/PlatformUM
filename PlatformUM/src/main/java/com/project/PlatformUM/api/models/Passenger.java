@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Passenger {
@@ -44,9 +45,9 @@ public class Passenger {
     @Column(nullable = false)
     private Gender gender;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "reservation_id", nullable = false)
-    private List<Reservation> reservations = new ArrayList<>();
+    private Reservation reservation;
 
     @Column(nullable = false)
     private Number seatNumber;
@@ -96,12 +97,12 @@ public class Passenger {
     }
 
     @JsonIgnoreProperties({"passenger"})
-    public List<Reservation> getReservation() {
-        return reservations;
+    public Reservation getReservation() {
+        return reservation;
     }
 
-    public void setReservation(List<Reservation> reservations) {
-        this.reservations = reservations;
+    public void setReservation(Reservation reservations) {
+        this.reservation = reservations;
     }
 
     public Number getSeatNumber() {

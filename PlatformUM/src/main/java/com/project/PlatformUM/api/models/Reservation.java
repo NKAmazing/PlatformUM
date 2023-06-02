@@ -20,6 +20,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 
@@ -52,9 +53,9 @@ public class Reservation {
     private LocalDateTime date;
 
     @Column(nullable = false)
-    private Number price;
+    private Integer price;
 
-    @ManyToMany(mappedBy = "reservations", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL)
     private List<Passenger> passengers = new ArrayList<>();
 
 
@@ -105,11 +106,11 @@ public class Reservation {
         this.date = LocalDateTime.parse(date, formatter);
     }
 
-    public Number getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Number price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
