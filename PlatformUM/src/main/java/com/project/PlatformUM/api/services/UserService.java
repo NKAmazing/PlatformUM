@@ -31,11 +31,11 @@ public class UserService {
     public User updateById(User request, Long id){
         User user = userRepository.findById(id).get();
 
-        user.setUsername(request.getUsername());
-        user.setPassword(request.getPassword());
-        user.setIsAdmin(request.getIsAdmin());
-        user.setEmail(request.getEmail());
-        user.setTelephone(request.getTelephone());
+        if (request.getUsername() != null) user.setUsername(request.getUsername());
+        if (request.getPassword() != null) user.setPassword(request.getPassword());
+        if (request.getIsAdmin() != null) user.setIsAdmin(request.getIsAdmin());
+        if (request.getEmail() != null) user.setEmail(request.getEmail());
+        if (request.getTelephone() != null) user.setTelephone(request.getTelephone());
 
         return userRepository.save(user);
     }

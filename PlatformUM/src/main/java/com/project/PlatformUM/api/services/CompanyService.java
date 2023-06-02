@@ -30,7 +30,7 @@ public class CompanyService {
     public Company updateById(Company request, Long id){
         Company company = companyRepository.findById(id).get();
 
-        company.setName(request.getName());
+        if (request.getName() != null) company.setName(request.getName());
 
         return companyRepository.save(company);
     }

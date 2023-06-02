@@ -32,14 +32,16 @@ public class PassengerService {
     public Passenger updateById(Passenger request, Long id){
         Passenger passenger = passengerRepository.findById(id).get();
 
-        passenger.setFullname(request.getFullname());
-        // For birthdate, we need to format it to a string.
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        String formattedDate = request.getBirthdate().format(formatter);
-        passenger.setBirthdate(formattedDate);
-        passenger.setNid(request.getNid());
-        passenger.setGender(request.getGender());
-        passenger.setSeatNumber(request.getSeatNumber());
+        if (request.getFullname() != null) passenger.setFullname(request.getFullname());
+        if (request.getBirthdate() != null) {
+            // For birthdate, we need to format it to a string.
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            String formattedDate = request.getBirthdate().format(formatter);
+            passenger.setBirthdate(formattedDate);
+        }
+        if (request.getNid() != null) passenger.setNid(request.getNid());
+        if (request.getGender() != null) passenger.setGender(request.getGender());
+        if (request.getSeatNumber() != null) passenger.setSeatNumber(request.getSeatNumber());
 
         return passengerRepository.save(passenger);
     }

@@ -31,8 +31,8 @@ public class ReservationService {
     public Reservation updateById(Reservation request, Long id){
         Reservation reservation = reservationRepository.findById(id).get();
 
-        reservation.setUser(request.getUser());
-        reservation.setPrice(request.getPrice());
+        if (request.getUser() != null) reservation.setUser(request.getUser());
+        if (request.getPrice() != null) reservation.setPrice(request.getPrice());
 
         return reservation;
     }

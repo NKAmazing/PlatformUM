@@ -30,8 +30,8 @@ public class TripService {
     public Trip updateById(Trip request, Long id){
         Trip trip = tripRepository.findById(id).get();
 
-        trip.setDestination(request.getDestination());
-        trip.setCompany(request.getCompany());
+        if (request.getDestination() != null) trip.setDestination(request.getDestination());
+        if (request.getCompany() != null) trip.setCompany(request.getCompany());
 
         return trip;
     }

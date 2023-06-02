@@ -30,10 +30,11 @@ public class VehicleService {
     public Vehicle updateById(Vehicle request, Long id){
         Vehicle vehicle = vehicleRepository.findById(id).get();
 
-        vehicle.setName(request.getName());
-        vehicle.setType(request.getType());
-        vehicle.setSeats(request.getSeats());
-        vehicle.setCompany(request.getCompany());
+
+        if (request.getName() != null) vehicle.setName(request.getName());
+        if (request.getType() != null) vehicle.setType(request.getType());
+        if (request.getSeats() != null) vehicle.setSeats(request.getSeats());
+        if (request.getCompany() != null) vehicle.setCompany(request.getCompany());
 
         return vehicleRepository.save(vehicle);
     }
