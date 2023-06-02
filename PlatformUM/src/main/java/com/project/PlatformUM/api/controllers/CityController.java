@@ -1,12 +1,18 @@
 package com.project.PlatformUM.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
 import com.project.PlatformUM.api.services.CityService;
+
+import org.springframework.ui.Model;
+
 import com.project.PlatformUM.api.models.City;
 
 import java.util.List;
 import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/cities")
@@ -15,9 +21,16 @@ public class CityController {
     @Autowired
     private CityService cityService;
 
-    @GetMapping
-    public List<City> getCities() {
-        return this.cityService.getCities();
+    // TODO: Change filter in the future  to frontend. With youtube video.
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<City> viewHomePage(Model model, @Param("keyWord") String keyWord) {
+        // String keyWord = "";
+        List<City> listCities = cityService.getCities(keyWord);
+        // model.addAttribute("listCities", listCities);
+        // model.addAttribute("keyWord", keyWord);
+
+        return listCities;
+        // return index;
     }
 
     @GetMapping("/{id}")
