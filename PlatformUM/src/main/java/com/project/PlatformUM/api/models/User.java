@@ -4,14 +4,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.CascadeType;
 
-import java.util.Set;
-import java.util.HashSet;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
+import java.util.ArrayList;
 
 
 @Entity
@@ -37,7 +37,7 @@ public class User {
     private Boolean isAdmin;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Reservation> reservations;
+    private List<Reservation> reservations = new ArrayList<>();
     
 
     // Getters and setters of the class attributes
@@ -89,6 +89,7 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
+    @JsonIgnoreProperties({"user"})
     public List<Reservation> getReservations() {
         return reservations;
     }

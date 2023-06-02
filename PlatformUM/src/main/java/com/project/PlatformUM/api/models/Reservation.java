@@ -18,7 +18,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.EnumType;
@@ -68,7 +67,7 @@ public class Reservation {
         this.id = id;
     }
 
-    @JsonIgnoreProperties({"reservation"})
+    @JsonIgnoreProperties({"reservations"})
     public User getUser() {
         return user;
     }
@@ -77,7 +76,7 @@ public class Reservation {
         this.user = user;
     }
 
-    @JsonIgnoreProperties({"reservation"})
+    @JsonIgnoreProperties({"reservations"})
     public Trip getTrip() {
         return trip;
     }
