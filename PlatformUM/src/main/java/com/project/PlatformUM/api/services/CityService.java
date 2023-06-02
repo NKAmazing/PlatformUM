@@ -30,8 +30,8 @@ public class CityService {
     public City updateById(City request, Long id){
         City city = cityRepository.findById(id).get();
 
-        city.setName(request.getName());
-        city.setState(request.getState());
+        if (request.getName() != null) city.setName(request.getName());
+        if (request.getState() != null) city.setState(request.getState());
 
         return cityRepository.save(city);
     }
