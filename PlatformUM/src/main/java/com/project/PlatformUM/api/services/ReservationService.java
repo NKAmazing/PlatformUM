@@ -32,9 +32,12 @@ public class ReservationService {
         Reservation reservation = reservationRepository.findById(id).get();
 
         if (request.getUser() != null) reservation.setUser(request.getUser());
+        if (request.getTrip() != null) reservation.setTrip(request.getTrip());
+        if (request.getStatus() != null) reservation.setStatus(request.getStatus());
         if (request.getPrice() != null) reservation.setPrice(request.getPrice());
+        if (request.getPassengers() != null) reservation.setPassengers(request.getPassengers());
 
-        return reservation;
+        return reservationRepository.save(reservation);
     }
 
     public Boolean deleteReservation (Long id) {
