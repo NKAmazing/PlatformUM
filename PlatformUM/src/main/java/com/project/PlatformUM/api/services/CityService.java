@@ -31,6 +31,7 @@ public class CityService {
         City city = cityRepository.findById(id).get();
 
         city.setName(request.getName());
+        city.setState(request.getState());
 
         return cityRepository.save(city);
     }

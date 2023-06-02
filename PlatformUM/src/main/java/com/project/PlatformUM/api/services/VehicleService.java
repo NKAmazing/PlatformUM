@@ -2,7 +2,6 @@ package com.project.PlatformUM.api.services;
 
 import com.project.PlatformUM.api.models.Vehicle;
 import com.project.PlatformUM.api.repositories.IVehicleRepository;
-import org.intellij.lang.annotations.JdkConstants.AdjustableOrientation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +32,8 @@ public class VehicleService {
 
         vehicle.setName(request.getName());
         vehicle.setType(request.getType());
+        vehicle.setSeats(request.getSeats());
+        vehicle.setCompany(request.getCompany());
 
         return vehicleRepository.save(vehicle);
     }

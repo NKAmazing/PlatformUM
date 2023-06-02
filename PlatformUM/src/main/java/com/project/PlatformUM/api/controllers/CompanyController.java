@@ -40,9 +40,9 @@ public class CompanyController {
         boolean isDeleted = this.companyService.deleteCompany(id);
 
         if (isDeleted) {
-            return "City with id " + id + " was deleted.";
+            return "Company with id " + id + " was deleted.";
         } else {
-            return "City with id " + id + " was not deleted.";
+            return "Company with id " + id + " was not deleted.";
         }
     }
 }

@@ -40,9 +40,9 @@ public class ReservationController {
         boolean isDeleted = this.reservationService.deleteReservation(id);
 
         if (isDeleted) {
-            return "City with id " + id + " was deleted.";
+            return "Reservation with id " + id + " was deleted.";
         } else {
-            return "City with id " + id + " was not deleted.";
+            return "Reservation with id " + id + " was not deleted.";
         }
     }
 }

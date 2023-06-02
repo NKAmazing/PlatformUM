@@ -78,7 +78,7 @@ public class Passenger {
         // birthdate format is "dd-MM-yyyy"
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         this.birthdate = LocalDate.parse(birthdate, formatter);
-    }
+    }    
 
     public Number getNid() {
         return nid;

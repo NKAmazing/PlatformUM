@@ -43,9 +43,9 @@ public class UserController {
         boolean isDeleted = this.userService.deleteUser(id);
 
         if (isDeleted) {
-            return "City with id " + id + " was deleted.";
+            return "User with id " + id + " was deleted.";
         } else {
-            return "City with id " + id + " was not deleted.";
+            return "User with id " + id + " was not deleted.";
         }
     }  
 }

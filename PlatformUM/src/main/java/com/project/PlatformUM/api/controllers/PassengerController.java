@@ -40,9 +40,9 @@ public class PassengerController {
         boolean isDeleted = this.passengerService.deletePassenger(id);
 
         if (isDeleted) {
-            return "City with id " + id + " was deleted.";
+            return "Passenger with id " + id + " was deleted.";
         } else {
-            return "City with id " + id + " was not deleted.";
+            return "Passenger with id " + id + " was not deleted.";
         }
     }
 }

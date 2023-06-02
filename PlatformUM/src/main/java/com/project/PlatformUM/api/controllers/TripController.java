@@ -40,9 +40,9 @@ public class TripController {
         boolean isDeleted = this.tripService.deleteTrip(id);
 
         if (isDeleted) {
-            return "Object with id " + id + " was deleted.";
+            return "Trip with id " + id + " was deleted.";
         } else {
-            return "Object with id " + id + " was not deleted.";
+            return "Trip with id " + id + " was not deleted.";
         }
     }
 }

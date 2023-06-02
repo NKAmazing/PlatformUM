@@ -40,9 +40,9 @@ public class VehicleController {
         boolean isDeleted = this.vehicleService.deleteVehicle(id);
 
         if (isDeleted) {
-            return "City with id " + id + " was deleted.";
+            return "Vehicle with id " + id + " was deleted.";
         } else {
-            return "City with id " + id + " was not deleted.";
+            return "Vehicle with id " + id + " was not deleted.";
         }
     }
 }

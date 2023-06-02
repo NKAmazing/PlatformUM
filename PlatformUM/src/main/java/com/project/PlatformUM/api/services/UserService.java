@@ -33,6 +33,7 @@ public class UserService {
 
         user.setUsername(request.getUsername());
         user.setPassword(request.getPassword());
+        user.setIsAdmin(request.getIsAdmin());
         user.setEmail(request.getEmail());
         user.setTelephone(request.getTelephone());
 

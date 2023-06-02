@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional; //Devuelve nulo o algo.
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 
@@ -32,9 +33,15 @@ public class PassengerService {
         Passenger passenger = passengerRepository.findById(id).get();
 
         passenger.setFullname(request.getFullname());
+        // For birthdate, we need to format it to a string.
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String formattedDate = request.getBirthdate().format(formatter);
+        passenger.setBirthdate(formattedDate);
         passenger.setNid(request.getNid());
+        passenger.setGender(request.getGender());
+        passenger.setSeatNumber(request.getSeatNumber());
 
-        return passenger;
+        return passengerRepository.save(passenger);
     }
 
     public Boolean deletePassenger (Long id) {

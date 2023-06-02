@@ -40,9 +40,9 @@ public class DestinationController {
         boolean isDeleted = this.destinationService.deleteDestination(id);
 
         if (isDeleted) {
-            return "City with id " + id + " was deleted.";
+            return "Destination with id " + id + " was deleted.";
         } else {
-            return "City with id " + id + " was not deleted.";
+            return "Destination with id " + id + " was not deleted.";
         }
     }
 }
