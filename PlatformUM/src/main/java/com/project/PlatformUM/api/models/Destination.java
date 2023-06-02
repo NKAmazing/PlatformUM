@@ -38,7 +38,7 @@ public class Destination {
     @Column(nullable = false)
     private Float distance;
 
-    @OneToOne(mappedBy = "destination", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "destination")
     private Trip trip;
 
     public Long getId() {

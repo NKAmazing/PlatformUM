@@ -24,7 +24,7 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne()
+    @OneToOne
     @JoinColumn(name = "destination_id")
     private Destination destination;
 
