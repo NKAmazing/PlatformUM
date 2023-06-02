@@ -52,7 +52,7 @@ public class Reservation {
     private LocalDateTime date;
 
     @Column(nullable = false)
-    private Integer price;
+    private Float price;
 
     @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL)
     private List<Passenger> passengers = new ArrayList<>();
@@ -105,11 +105,11 @@ public class Reservation {
         this.date = LocalDateTime.parse(date, formatter);
     }
 
-    public Integer getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 

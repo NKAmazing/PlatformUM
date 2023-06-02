@@ -30,11 +30,13 @@ public class DestinationService {
     //! Ver si se puede hacer un update de todos los campos.
     public Destination updateById(Destination request, Long id){
         Destination destination = destinationRepository.findById(id).get();
-
-        destination.setOrigin(request.getOrigin());
-        destination.setDestination(request.getDestination());
         
-        return destination;
+        if (request.getTravelDuration() != null) destination.setTravelDuration(request.getTravelDuration());
+        if (request.getDistance() != null) destination.setDistance(request.getDistance());
+        if (request.getOrigin() != null) destination.setOrigin(request.getOrigin());
+        if (request.getDestination() != null) destination.setDestination(request.getDestination());
+
+        return destinationRepository.save(destination);
     }
 
     public Boolean deleteDestination (Long id) {

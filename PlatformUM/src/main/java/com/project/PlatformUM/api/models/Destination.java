@@ -22,11 +22,11 @@ public class Destination {
     private Long id;
     
     @OneToOne
-    @JoinColumn(name = "city_origin_id")
+    @JoinColumn(name = "city_origin_id", nullable = false)
     private City origin;
 
     @OneToOne
-    @JoinColumn(name = "city_destination_id")
+    @JoinColumn(name = "city_destination_id", nullable = false)
     private City destination;
 
     @Column(nullable = false)
