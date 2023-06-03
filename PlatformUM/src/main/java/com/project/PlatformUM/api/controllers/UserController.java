@@ -1,12 +1,18 @@
 package com.project.PlatformUM.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import com.project.PlatformUM.api.services.UserService;
+
+import ch.qos.logback.core.model.Model;
+
+import org.springframework.http.MediaType;
 import com.project.PlatformUM.api.models.User;
 
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -18,9 +24,15 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
-    public List<User> getUsers() {
-        return this.userService.getUsers();
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<User> getUsers(Model model, @Param("keyWord") String keyWord) {
+        // String keyWord = "";
+        List<User> listUsers = userService.getUsers(keyWord);
+        // model.addAttribute("listUsers", listUsers);
+        // model.addAttribute("keyWord", keyWord);
+
+        return listUsers;
+        // return index;
     }
 
     @GetMapping("/{id}")

@@ -15,7 +15,11 @@ public class UserService {
     @Autowired
     IUserRepository userRepository;
 
-    public ArrayList<User> getUsers() {
+    //* Adding filter by name.
+    public ArrayList<User> getUsers(String keyWord) {
+        if (keyWord != null) {
+            return (ArrayList<User>) userRepository.findAll(keyWord);
+        }
         return (ArrayList<User>) userRepository.findAll();
     }
 
@@ -27,7 +31,6 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    //! Verificar si se necesitan todos los campos
     public User updateById(User request, Long id){
         User user = userRepository.findById(id).get();
 
@@ -49,12 +52,12 @@ public class UserService {
         }
     }
 
-    public User getByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
+    // public User getByEmail(String email) {
+    //     return userRepository.findByEmail(email);
+    // }
 
-    public User getByUsername(String username) {
-        return userRepository.findByUsername(username);
-    }
+    // public User getByUsername(String username) {
+    //     return userRepository.findByUsername(username);
+    // }
     
 }
