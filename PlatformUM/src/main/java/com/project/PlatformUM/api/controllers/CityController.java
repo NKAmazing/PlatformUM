@@ -23,7 +23,7 @@ public class CityController {
 
     // TODO: Change filter in the future  to frontend. With youtube video.
     @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<City> viewHomePage(Model model, @Param("keyWord") String keyWord) {
+    public List<City> getCities(Model model, @Param("keyWord") String keyWord) {
         // String keyWord = "";
         List<City> listCities = cityService.getCities(keyWord);
         // model.addAttribute("listCities", listCities);

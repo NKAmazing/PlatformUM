@@ -1,12 +1,19 @@
 package com.project.PlatformUM.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import com.project.PlatformUM.api.services.TripService;
+
+import ch.qos.logback.core.model.Model;
+
+import org.springframework.http.MediaType;
+
 import com.project.PlatformUM.api.models.Trip;
 
 import java.util.List;
 import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/trips")
@@ -15,9 +22,16 @@ public class TripController {
     @Autowired
     private TripService tripService;
 
-    @GetMapping
-    public List<Trip> getTrips() {
-        return this.tripService.getTrips();
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Trip> getTrips(Model model, @Param("cityOriginKey") String cityOriginKey,
+            @Param("cityDestinationKey") String cityDestinationKey, @Param("dateFrom") String dateFrom) {
+        // String keyWord = "";
+        List<Trip> listTrips = tripService.getTrips(cityOriginKey, cityDestinationKey, dateFrom);
+        // model.addAttribute("listTrips", listTrips);
+        // model.addAttribute("keyWord", keyWord);
+
+        return listTrips;
+        // return index;
     }
 
     @GetMapping("/{id}")
