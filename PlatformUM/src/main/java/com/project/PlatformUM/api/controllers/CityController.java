@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
 import com.project.PlatformUM.api.services.CityService;
 
-import org.springframework.ui.Model;
+import ch.qos.logback.core.model.Model;
 
 import com.project.PlatformUM.api.models.City;
 
@@ -22,13 +22,14 @@ public class CityController {
     private CityService cityService;
 
     // TODO: Change filter in the future  to frontend. With youtube video.
-    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
-    // keyword opcional
-    public List<City> getCities(@Param("keyword") String keyword) {
-        if (keyword != null) {
-            return cityService.getCitiesByName(keyword);
-        }
-        return cityService.getCities();
+    @GetMapping()
+    public List<City> getCities() {
+        return this.cityService.getCities();
+    }
+
+    @GetMapping(value = "/{keyword}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<City> getCitiesByName(Model model, @PathVariable("keyword") String keyword) {
+        return this.cityService.getCitiesByName(keyword);
     }
 
     @GetMapping("/{id}")
