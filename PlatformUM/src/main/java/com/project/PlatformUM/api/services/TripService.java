@@ -15,10 +15,14 @@ public class TripService {
     @Autowired
     ITripRepository tripRepository;
 
+    public ArrayList<Trip> getTrips() {
+        return (ArrayList<Trip>) tripRepository.findAll();
+    }
+
     //* Adding filter by name.
-    public ArrayList<Trip> getTrips(String keyWord, String keyWord2, String dateFrom) {
+    public ArrayList<Trip> getTripsByInfo(String keyWord, String keyWord2, String dateFrom) {
         if (keyWord != null && keyWord2 != null && dateFrom != null) {
-            return (ArrayList<Trip>) tripRepository.findAll(keyWord, keyWord2, dateFrom);
+            return (ArrayList<Trip>) tripRepository.findByInfo(keyWord, keyWord2, dateFrom);
         }
         return (ArrayList<Trip>) tripRepository.findAll();
     }

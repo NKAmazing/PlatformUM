@@ -22,11 +22,16 @@ public class TripController {
     @Autowired
     private TripService tripService;
 
-    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping("/")
+    public List<Trip> getTrips() {
+        return this.tripService.getTrips();
+    }
+
+    @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Trip> getTrips(Model model, @Param("cityOriginKey") String cityOriginKey,
             @Param("cityDestinationKey") String cityDestinationKey, @Param("dateFrom") String dateFrom) {
         // String keyWord = "";
-        List<Trip> listTrips = tripService.getTrips(cityOriginKey, cityDestinationKey, dateFrom);
+        List<Trip> listTrips = tripService.getTripsByInfo(cityOriginKey, cityDestinationKey, dateFrom);
         // model.addAttribute("listTrips", listTrips);
         // model.addAttribute("keyWord", keyWord);
 

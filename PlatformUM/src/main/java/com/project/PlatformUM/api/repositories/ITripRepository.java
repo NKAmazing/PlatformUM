@@ -19,7 +19,7 @@ public interface ITripRepository extends JpaRepository<Trip, Long> {
             "WHERE origin.name LIKE %:keyword% " +
             "AND destination.name LIKE %:keyword2% " +
             "AND d.date >= :dateFrom")
-    public List<Trip> findAll(@Param("keyword") String keyword, @Param("keyword2") String keyword2,
+    public List<Trip> findByInfo(@Param("keyword") String keyword, @Param("keyword2") String keyword2,
                                             @Param("dateFrom") String dateFrom);
 
 }
