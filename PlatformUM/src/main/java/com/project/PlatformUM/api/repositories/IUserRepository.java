@@ -12,7 +12,7 @@ public interface IUserRepository extends JpaRepository<User, Long> {
     @Query("SELECT u FROM User u WHERE u.username LIKE %?1%"
             + " OR u.email LIKE %?1%"
             + " OR u.telephone LIKE %?1%")
-    public List<User> findAll(String keyWord);
+    public List<User> findByInfo(String keyWord);
     
     
     //!REVISAR

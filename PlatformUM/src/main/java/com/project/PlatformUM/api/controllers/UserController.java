@@ -24,10 +24,15 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping()
+    public List<User> getUsers() {
+        return this.userService.getUsers();
+    }
+
+    @GetMapping(value = "/{keyword}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<User> getUsers(Model model, @Param("keyWord") String keyWord) {
         // String keyWord = "";
-        List<User> listUsers = userService.getUsers(keyWord);
+        List<User> listUsers = userService.getUsersByInfo(keyWord);
         // model.addAttribute("listUsers", listUsers);
         // model.addAttribute("keyWord", keyWord);
 

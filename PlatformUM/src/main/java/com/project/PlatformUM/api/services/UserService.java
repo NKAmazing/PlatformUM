@@ -15,12 +15,13 @@ public class UserService {
     @Autowired
     IUserRepository userRepository;
 
-    //* Adding filter by name.
-    public ArrayList<User> getUsers(String keyWord) {
-        if (keyWord != null) {
-            return (ArrayList<User>) userRepository.findAll(keyWord);
-        }
+    public ArrayList<User> getUsers() {
         return (ArrayList<User>) userRepository.findAll();
+    }
+
+    //* Adding filter by name.
+    public ArrayList<User> getUsersByInfo(String keyWord) {
+        return (ArrayList<User>) userRepository.findByInfo(keyWord);
     }
 
     public Optional<User> getById(Long id) {
