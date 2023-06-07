@@ -11,6 +11,6 @@ public interface ICityRepository extends JpaRepository<City, Long> {
 
     @Query("SELECT c FROM City c WHERE c.name LIKE %?1%"
             + " OR c.state LIKE %?1%")
-    public List<City> findAll(String keyWord);
+    public List<City> findByName(String keyWord);
 
 }

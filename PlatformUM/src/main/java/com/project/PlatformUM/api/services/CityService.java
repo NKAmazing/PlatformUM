@@ -15,12 +15,14 @@ public class CityService {
     @Autowired
     ICityRepository cityRepository;
 
-    //* Adding filter by name.
-    public ArrayList<City> getCities(String keyWord) {
-        if (keyWord != null) {
-            return (ArrayList<City>) cityRepository.findAll(keyWord);
-        }
+    //get all cities
+    public ArrayList<City> getCities() {
         return (ArrayList<City>) cityRepository.findAll();
+    }
+
+    //* Adding filter by name.
+    public ArrayList<City> getCitiesByName(String keyword) {
+        return (ArrayList<City>) cityRepository.findByName(keyword);
     }
 
     public Optional<City> getById(Long id) {
