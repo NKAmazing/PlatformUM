@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import com.project.PlatformUM.api.services.CityService;
 
 import ch.qos.logback.core.model.Model;
+import lombok.RequiredArgsConstructor;
 
 import com.project.PlatformUM.api.models.City;
 
@@ -15,7 +16,8 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/api/cities")
+@RequestMapping("/api/v1/cities")
+@RequiredArgsConstructor
 public class CityController {
 
     @Autowired

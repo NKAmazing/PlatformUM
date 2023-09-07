@@ -3,13 +3,17 @@ package com.project.PlatformUM.api.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.project.PlatformUM.api.services.DestinationService;
+
+import lombok.RequiredArgsConstructor;
+
 import com.project.PlatformUM.api.models.Destination;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/destinations")
+@RequestMapping("/api/v1/destinations")
+@RequiredArgsConstructor
 public class DestinationController {
 
     @Autowired

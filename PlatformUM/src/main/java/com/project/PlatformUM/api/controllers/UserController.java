@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PlatformUM.api.services.UserService;
 
 import ch.qos.logback.core.model.Model;
+import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.MediaType;
 import com.project.PlatformUM.api.models.User;
@@ -18,7 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/v1/users")
+@RequiredArgsConstructor
 public class UserController {
 
     @Autowired

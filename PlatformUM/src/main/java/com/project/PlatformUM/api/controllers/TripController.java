@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import com.project.PlatformUM.api.services.TripService;
 
 import ch.qos.logback.core.model.Model;
+import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.MediaType;
 
@@ -16,7 +17,8 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("/api/trips")
+@RequestMapping("/api/v1/trips")
+@RequiredArgsConstructor
 public class TripController {
 
     @Autowired

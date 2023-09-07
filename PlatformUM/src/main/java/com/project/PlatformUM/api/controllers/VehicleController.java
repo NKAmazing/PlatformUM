@@ -3,13 +3,17 @@ package com.project.PlatformUM.api.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.project.PlatformUM.api.services.VehicleService;
+
+import lombok.RequiredArgsConstructor;
+
 import com.project.PlatformUM.api.models.Vehicle;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/vehicles")
+@RequestMapping("/api/v1/vehicles")
+@RequiredArgsConstructor
 public class VehicleController {
 
     @Autowired

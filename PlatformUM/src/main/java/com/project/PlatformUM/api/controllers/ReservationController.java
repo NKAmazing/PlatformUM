@@ -3,13 +3,17 @@ package com.project.PlatformUM.api.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.project.PlatformUM.api.services.ReservationService;
+
+import lombok.RequiredArgsConstructor;
+
 import com.project.PlatformUM.api.models.Reservation;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/reservations")
+@RequestMapping("/api/v1/reservations")
+@RequiredArgsConstructor
 public class ReservationController {
 
     @Autowired
