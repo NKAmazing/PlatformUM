@@ -23,7 +23,7 @@ public class DestinationController {
     public List<Destination> getDestinations() {
         return this.destinationService.getDestinations();
     }
-
+    
     @GetMapping("/{id}")
     public Optional<Destination> getDestination(@PathVariable("id") Long id) {
         return this.destinationService.getById(id);

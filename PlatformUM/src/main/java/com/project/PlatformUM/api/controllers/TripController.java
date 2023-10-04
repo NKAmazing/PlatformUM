@@ -24,7 +24,7 @@ public class TripController {
     @Autowired
     private TripService tripService;
 
-    @GetMapping("/")
+    @GetMapping
     public List<Trip> getTrips() {
         return this.tripService.getTrips();
     }

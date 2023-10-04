@@ -12,6 +12,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.PrePersist;
 
@@ -21,11 +22,11 @@ public class Destination {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "city_origin_id", nullable = false)
     private City origin;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "city_destination_id", nullable = false)
     private City destination;
 
@@ -52,9 +53,12 @@ public class Destination {
     // This method is called before the object is persisted in the database
     @PrePersist
     public void prePersist() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        String date = LocalDateTime.now().format(formatter);
-        this.date = LocalDateTime.parse(date, formatter);
+        if (this.date != null) {
+            return;
+        }    
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+        String dateStr = this.date.format(formatter);
+        this.date = LocalDateTime.parse(dateStr, formatter);
     }
 
     public Float getTravelDuration() {
