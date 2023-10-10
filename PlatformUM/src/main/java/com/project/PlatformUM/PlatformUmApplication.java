@@ -27,6 +27,7 @@ public class PlatformUmApplication {
         String dbUsername = dotenv.get("DB_USERNAME");
         String dbPassword = dotenv.get("DB_PASSWORD");
         String dbDriverClassName = dotenv.get("DB_DRIVER_CLASS_NAME");
+        String serverPort = dotenv.get("SERVER_PORT");
 
         // Configure the database settings as system properties
         System.setProperty("DB_URL", dbUrl);
@@ -34,9 +35,11 @@ public class PlatformUmApplication {
         System.setProperty("DB_PASSWORD", dbPassword);
         System.setProperty("DB_DRIVER_CLASS_NAME", dbDriverClassName);
 
+        // Configure server port
+        System.setProperty("SERVER_PORT", serverPort);
+
         // Spring boot application starter
 		SpringApplication.run(PlatformUmApplication.class, args);
-
 	}
 
     // This method is used to create a RestTemplate bean which is used to make HTTP requests.
