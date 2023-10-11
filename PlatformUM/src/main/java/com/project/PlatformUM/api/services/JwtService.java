@@ -73,10 +73,13 @@ public class JwtService {
         return getClaim(token, Claims::getExpiration);
     }
 
-    private boolean isTokenExpired(String token) {
-        return getExpirationDateFromToken(token).before(new Date());
+    public boolean isTokenExpired(String token) {
+        try {
+            return getExpirationDateFromToken(token).before(new Date());
+        } catch (Exception e) {
+            return true;
+        }
     }
-
 }
 
 

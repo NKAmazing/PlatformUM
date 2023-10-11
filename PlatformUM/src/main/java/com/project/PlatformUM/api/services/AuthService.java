@@ -1,6 +1,7 @@
 package com.project.PlatformUM.api.services;
 
 import com.project.PlatformUM.api.auth.AuthResponse;
+import com.project.PlatformUM.api.auth.TokenResponse;
 import com.project.PlatformUM.api.auth.LoginRequest;
 import com.project.PlatformUM.api.auth.RegisterRequest;
 import com.project.PlatformUM.api.models.Role;
@@ -14,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-
 
 @Service
 @RequiredArgsConstructor
@@ -48,7 +48,13 @@ public class AuthService {
         return AuthResponse.builder()
             .token(jwtService.getToken(user))
             .build();
-
         }
 
+    public TokenResponse checkToken(AuthResponse request) {
+        boolean isTokenValid = !jwtService.isTokenExpired(request.getToken());
+
+        return TokenResponse.builder()
+            .isTokenValid(isTokenValid)
+            .build();
+    }
 }
