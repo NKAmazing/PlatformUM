@@ -15,7 +15,7 @@ public interface IUserRepository extends JpaRepository<User, Long> {
             + " OR u.telephone LIKE %?1%")
     public List<User> findByInfo(String keyWord);
     
-    Optional<User> findByUsername(String username);
+    public Optional<User> findByUsername(String username);
     
     //!REVISAR
     // User findByEmail(String email);
