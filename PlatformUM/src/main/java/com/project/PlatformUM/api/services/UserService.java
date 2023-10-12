@@ -2,18 +2,24 @@ package com.project.PlatformUM.api.services;
 
 import com.project.PlatformUM.api.models.User;
 import com.project.PlatformUM.api.repositories.IUserRepository;
+
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional; //Devuelve nulo o algo.
 import java.util.ArrayList;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
     
     @Autowired
     IUserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public ArrayList<User> getUsers() {
         return (ArrayList<User>) userRepository.findAll();
@@ -40,7 +46,7 @@ public class UserService {
         User user = userRepository.findById(id).get();
 
         if (request.getUsername() != null) user.setUsername(request.getUsername());
-        if (request.getPassword() != null) user.setPassword(request.getPassword());
+        if (request.getPassword() != null) user.setPassword(passwordEncoder.encode(request.getPassword()));
         if (request.getEmail() != null) user.setEmail(request.getEmail());
         if (request.getTelephone() != null) user.setTelephone(request.getTelephone());
 
