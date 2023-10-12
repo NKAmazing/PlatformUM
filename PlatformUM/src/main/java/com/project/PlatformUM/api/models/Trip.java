@@ -24,7 +24,7 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "destination_id")
     private Destination destination;
 
@@ -64,6 +64,9 @@ public class Trip {
 
     public void setCompany(Company company) {
         this.company = company;
+    }
+
+    public void setId(Long long1) {
     }
 
 }

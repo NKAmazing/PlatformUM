@@ -30,15 +30,9 @@ public class TripController {
     }
 
     @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Trip> getTrips(Model model, @Param("cityOriginKey") String cityOriginKey,
-            @Param("cityDestinationKey") String cityDestinationKey, @Param("dateFrom") String dateFrom) {
-        // String keyWord = "";
+    public List<Trip> getTrips(Model model, String cityOriginKey, String cityDestinationKey, String dateFrom) {
         List<Trip> listTrips = tripService.getTripsByInfo(cityOriginKey, cityDestinationKey, dateFrom);
-        // model.addAttribute("listTrips", listTrips);
-        // model.addAttribute("keyWord", keyWord);
-
         return listTrips;
-        // return index;
     }
 
     @GetMapping("/{id}")

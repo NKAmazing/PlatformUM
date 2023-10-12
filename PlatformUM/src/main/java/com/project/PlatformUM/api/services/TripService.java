@@ -19,9 +19,8 @@ public class TripService {
         return (ArrayList<Trip>) tripRepository.findAll();
     }
 
-    //* Adding filter by name.
     public ArrayList<Trip> getTripsByInfo(String keyWord, String keyWord2, String dateFrom) {
-        if (keyWord != null && keyWord2 != null && dateFrom != null) {
+        if (!keyWord.isEmpty() && !keyWord2.isEmpty() && !dateFrom.isEmpty()) {
             return (ArrayList<Trip>) tripRepository.findByInfo(keyWord, keyWord2, dateFrom);
         }
         return (ArrayList<Trip>) tripRepository.findAll();
