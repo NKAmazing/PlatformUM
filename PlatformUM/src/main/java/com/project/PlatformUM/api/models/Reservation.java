@@ -54,7 +54,7 @@ public class Reservation {
     @Column(nullable = false)
     private Float price;
 
-    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Passenger> passengers = new ArrayList<>();
 
 

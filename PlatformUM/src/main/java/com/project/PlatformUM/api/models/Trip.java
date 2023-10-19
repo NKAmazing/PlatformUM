@@ -28,7 +28,7 @@ public class Trip {
     @JoinColumn(name = "destination_id")
     private Destination destination;
 
-    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reservation> reservations = new ArrayList<>();
 
     @ManyToOne

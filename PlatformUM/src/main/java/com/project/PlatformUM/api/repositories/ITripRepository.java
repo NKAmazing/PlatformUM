@@ -17,5 +17,13 @@ public interface ITripRepository extends JpaRepository<Trip, Long> {
                 nativeQuery = true
             )
             public List<Trip> findByInfo(@Param("origin") String origin, @Param("destination") String destination, @Param("date") String date);
+
+        @Query(
+                value = "SELECT * FROM Trip T " +
+                        "WHERE (SELECT D.date FROM destination D WHERE D.id = T.destination_id) LIKE %:date% ",
+                nativeQuery = true
+            )       
+            public List<Trip> findByDate(@Param("date") String date);
+
             
 }

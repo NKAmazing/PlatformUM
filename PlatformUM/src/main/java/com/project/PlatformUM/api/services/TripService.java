@@ -1,5 +1,6 @@
 package com.project.PlatformUM.api.services;
 
+import com.fasterxml.jackson.databind.type.ArrayType;
 import com.project.PlatformUM.api.models.Trip;
 import com.project.PlatformUM.api.repositories.ITripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,13 @@ public class TripService {
     public ArrayList<Trip> getTripsByInfo(String keyWord, String keyWord2, String dateFrom) {
         if (!keyWord.isEmpty() && !keyWord2.isEmpty() && !dateFrom.isEmpty()) {
             return (ArrayList<Trip>) tripRepository.findByInfo(keyWord, keyWord2, dateFrom);
+        }
+        return (ArrayList<Trip>) tripRepository.findAll();
+    }
+
+    public ArrayList<Trip> getTripsbyDate(String date) {
+        if (!date.isEmpty()) {
+            return (ArrayList<Trip>) tripRepository.findByDate(date);
         }
         return (ArrayList<Trip>) tripRepository.findAll();
     }

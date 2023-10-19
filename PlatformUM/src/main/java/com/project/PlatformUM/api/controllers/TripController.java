@@ -35,6 +35,12 @@ public class TripController {
         return listTrips;
     }
 
+    @GetMapping(value = "/date", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Trip> getTrips(Model model, String dateNow) {
+        List<Trip> listTrips = tripService.getTripsbyDate(dateNow);
+        return listTrips;
+    }
+
     @GetMapping("/{id}")
     public Optional<Trip> getTrip(@PathVariable("id") Long id) {
         return this.tripService.getById(id);
