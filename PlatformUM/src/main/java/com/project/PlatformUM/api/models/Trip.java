@@ -28,7 +28,7 @@ public class Trip {
     @JoinColumn(name = "destination_id")
     private Destination destination;
 
-    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL)
     private List<Reservation> reservations = new ArrayList<>();
 
     @ManyToOne
@@ -37,6 +37,10 @@ public class Trip {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @JsonIgnoreProperties({"trip"})
@@ -65,8 +69,4 @@ public class Trip {
     public void setCompany(Company company) {
         this.company = company;
     }
-
-    public void setId(Long long1) {
-    }
-
 }

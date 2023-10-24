@@ -14,6 +14,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -21,6 +23,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Entity
 @Table(name = "user", uniqueConstraints = {@UniqueConstraint(columnNames = {"email"}), @UniqueConstraint(columnNames = {"telephone"})})
 public class User implements UserDetails {
+
+    public enum Role {
+        ADMIN,
+        USER
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,8 +52,8 @@ public class User implements UserDetails {
     private List<Reservation> reservations = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
-    Role role;
-
+    @Column(nullable = false)
+    private Role role = Role.USER;
 
     // @JsonIgnoreProperties({"user"})
     // public List<Reservation> getReservations() {
@@ -81,5 +88,4 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 }

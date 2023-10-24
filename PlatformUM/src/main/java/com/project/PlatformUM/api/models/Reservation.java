@@ -7,6 +7,7 @@ import jakarta.persistence.PrePersist;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.ArrayList;
@@ -93,6 +94,7 @@ public class Reservation {
         this.status = status;
     }
 
+    @JsonIgnoreProperties({"reservations"})
     public LocalDateTime getDate() {
         return date;
     }
@@ -100,9 +102,14 @@ public class Reservation {
     // This method is called before the object is persisted in the database
     @PrePersist
     public void prePersist() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        String date = LocalDateTime.now().format(formatter);
-        this.date = LocalDateTime.parse(date, formatter);
+        if (this.date != null) {
+            return;
+        }
+
+        this.date = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+        String dateStr = this.date.format(formatter);
+        this.date = LocalDateTime.parse(dateStr, formatter);
     }
 
     public Float getPrice() {
@@ -119,6 +126,10 @@ public class Reservation {
     }
 
     public void setPassengers(List<Passenger> passenger) {
+        if (passenger == null){
+            return;
+        }
+
         this.passengers = passenger;
     }
     

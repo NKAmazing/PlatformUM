@@ -4,7 +4,6 @@ import com.project.PlatformUM.api.auth.AuthResponse;
 import com.project.PlatformUM.api.auth.TokenResponse;
 import com.project.PlatformUM.api.auth.LoginRequest;
 import com.project.PlatformUM.api.auth.RegisterRequest;
-import com.project.PlatformUM.api.models.Role;
 import com.project.PlatformUM.api.models.User;
 import com.project.PlatformUM.api.repositories.IUserRepository;
 
@@ -40,7 +39,7 @@ public class AuthService {
             .username(request.getUsername())
             .password(passwordEncoder.encode(request.getPassword()))
             .telephone(request.getTelephone())
-            .role(Role.USER)
+            .role(User.Role.USER)
             .build();
 
         userRepository.save(user);
