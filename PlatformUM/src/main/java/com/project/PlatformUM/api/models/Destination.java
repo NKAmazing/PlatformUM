@@ -55,7 +55,9 @@ public class Destination {
     public void prePersist() {
         if (this.date != null) {
             return;
-        }    
+        }
+
+        this.date = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
         String dateStr = this.date.format(formatter);
         this.date = LocalDateTime.parse(dateStr, formatter);
