@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 
 import java.util.List;
 
@@ -23,6 +24,9 @@ public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
+    private Float price;
 
     @ManyToOne
     @JoinColumn(name = "destination_id")
@@ -41,6 +45,14 @@ public class Trip {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
     }
 
     @JsonIgnoreProperties({"trip"})

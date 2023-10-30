@@ -49,6 +49,7 @@ class Trip {
     - destination: Destination
     - reservations: Reservation[]
     - company: Company
+    - price: number
     + calculatePrice(): number
     + checkSeats(): number
 }

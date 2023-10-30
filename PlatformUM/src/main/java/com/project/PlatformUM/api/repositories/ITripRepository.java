@@ -25,5 +25,14 @@ public interface ITripRepository extends JpaRepository<Trip, Long> {
             )       
             public List<Trip> findByDate(@Param("date") String date);
 
-            
+         @Query(
+                value = "SELECT * FROM Trip T " +
+                        "WHERE (SELECT D.date FROM destination D WHERE D.id = T.destination_id) LIKE %:date% " +
+                        "AND (SELECT C.name FROM city C WHERE C.id = (SELECT D.city_origin_id FROM destination D WHERE D.id = T.destination_id)) = :origin " +
+                        "AND (SELECT C.name FROM city C WHERE C.id = (SELECT D.city_destination_id FROM destination D WHERE D.id = T.destination_id)) = :destination" +
+                        "ORDER BY T.price ASC",
+                nativeQuery = true
+            )
+            public List<Trip> findByInfoOrderByLowestPrice(@Param("origin") String origin, @Param("destination") String destination, @Param("date") String date);
+
 }
