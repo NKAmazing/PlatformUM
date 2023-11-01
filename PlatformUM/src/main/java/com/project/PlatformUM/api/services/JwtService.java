@@ -62,7 +62,6 @@ public class JwtService {
             .getBody();
     }
 
-    // This method is used to retrieve any information from token body.
     public <T> T getClaim(String token, Function<Claims, T> claimResolver) 
     {
         final Claims claims=getAllClaimsFromToken(token);

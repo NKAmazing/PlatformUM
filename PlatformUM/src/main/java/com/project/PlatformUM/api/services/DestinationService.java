@@ -5,7 +5,7 @@ import com.project.PlatformUM.api.repositories.IDestinationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional; //Devuelve nulo o algo.
+import java.util.Optional;
 import java.util.ArrayList;
 
 
@@ -27,7 +27,6 @@ public class DestinationService {
         return destinationRepository.save(destination);
     }
 
-    //! Ver si se puede hacer un update de todos los campos.
     public Destination updateById(Destination request, Long id){
         Destination destination = destinationRepository.findById(id).get();
         

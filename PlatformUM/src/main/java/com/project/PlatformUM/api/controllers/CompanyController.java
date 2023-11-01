@@ -11,6 +11,7 @@ import com.project.PlatformUM.api.models.Company;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping("/api/v1/companies")
 @RequiredArgsConstructor

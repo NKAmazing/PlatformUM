@@ -8,10 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional; //Devuelve nulo o algo.
+import java.util.Optional;
 import java.util.ArrayList;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +26,6 @@ public class UserService {
         return (ArrayList<User>) userRepository.findAll();
     }
 
-    //* Adding filter by name.
     public ArrayList<User> getUsersByInfo(String keyWord) {
         return (ArrayList<User>) userRepository.findByInfo(keyWord);
     }
@@ -61,13 +61,5 @@ public class UserService {
             return false;
         }
     }
-
-    // public User getByEmail(String email) {
-    //     return userRepository.findByEmail(email);
-    // }
-
-    // public User getByUsername(String username) {
-    //     return userRepository.findByUsername(username);
-    // }
     
 }

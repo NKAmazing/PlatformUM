@@ -24,6 +24,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 
+
 @Entity
 public class Reservation {
 
@@ -59,7 +60,6 @@ public class Reservation {
     private List<Passenger> passengers = new ArrayList<>();
 
 
-    // Getters and setters of the class attributes
     public Long getId() {
         return id;
     }
@@ -99,7 +99,6 @@ public class Reservation {
         return date;
     }
 
-    // This method is called before the object is persisted in the database
     @PrePersist
     public void prePersist() {
         if (this.date != null) {

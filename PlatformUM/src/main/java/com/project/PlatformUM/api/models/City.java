@@ -18,7 +18,6 @@ public class City {
     @Column(nullable = false)
     private String state;
 
-    // Getters and setters of the class attributes
     public Long getId() {
         return id;
     }

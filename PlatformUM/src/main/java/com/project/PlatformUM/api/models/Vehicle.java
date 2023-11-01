@@ -28,7 +28,6 @@ public class Vehicle {
     @JoinColumn(name = "company_id")
     private Company company;
 
-    // Getters and setters of the class attributes
     public Long getId() {
         return id;
     }

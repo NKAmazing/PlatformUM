@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
+
 @Entity
 public class Passenger {
 
@@ -49,8 +50,6 @@ public class Passenger {
     @Column(nullable = false)
     private Number seatNumber;
 
-
-    // Getters and setters of the class attributes
     public Long getId() {
         return id;
     }
@@ -72,7 +71,6 @@ public class Passenger {
     }
 
     public void setBirthdate(String birthdate) {
-        // birthdate format is "dd-MM-yyyy"
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         this.birthdate = LocalDate.parse(birthdate, formatter);
     }    

@@ -33,13 +33,9 @@ public class UserController {
 
     @GetMapping(value = "/{keyword}", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<User> getUsers(Model model, @Param("keyWord") String keyWord) {
-        // String keyWord = "";
         List<User> listUsers = userService.getUsersByInfo(keyWord);
-        // model.addAttribute("listUsers", listUsers);
-        // model.addAttribute("keyWord", keyWord);
 
         return listUsers;
-        // return index;
     }
 
     @GetMapping("/{id}")

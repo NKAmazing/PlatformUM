@@ -5,7 +5,7 @@ import com.project.PlatformUM.api.repositories.IReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional; //Devuelve nulo o algo.
+import java.util.Optional;
 import java.util.ArrayList;
 
 
@@ -27,7 +27,6 @@ public class ReservationService {
         return reservationRepository.save(reservation);
     }
 
-    //! Ver si se puede hacer un update de todos los campos.
     public Reservation updateById(Reservation request, Long id){
         Reservation reservation = reservationRepository.findById(id).get();
 

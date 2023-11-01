@@ -5,7 +5,7 @@ import com.project.PlatformUM.api.repositories.ICityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional; //Devuelve nulo o algo.
+import java.util.Optional;
 import java.util.ArrayList;
 
 
@@ -15,12 +15,10 @@ public class CityService {
     @Autowired
     ICityRepository cityRepository;
 
-    //get all cities
     public ArrayList<City> getCities() {
         return (ArrayList<City>) cityRepository.findAll();
     }
 
-    //* Adding filter by name.
     public ArrayList<City> getCitiesByName(String keyword) {
         return (ArrayList<City>) cityRepository.findByName(keyword);
     }

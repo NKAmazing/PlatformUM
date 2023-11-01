@@ -12,6 +12,7 @@ import com.project.PlatformUM.api.services.AuthService;
 
 import lombok.RequiredArgsConstructor;
 
+
 @RestController
 @RequestMapping("/token")
 @RequiredArgsConstructor

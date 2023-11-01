@@ -11,6 +11,7 @@ import com.project.PlatformUM.api.models.Destination;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping("/api/v1/destinations")
 @RequiredArgsConstructor

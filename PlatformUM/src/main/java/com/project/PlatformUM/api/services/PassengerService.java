@@ -5,7 +5,7 @@ import com.project.PlatformUM.api.repositories.IPassengerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional; //Devuelve nulo o algo.
+import java.util.Optional;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
@@ -28,13 +28,11 @@ public class PassengerService {
         return passengerRepository.save(passenger);
     }
 
-    //! Ver si se puede hacer un update de todos los campos.
     public Passenger updateById(Passenger request, Long id){
         Passenger passenger = passengerRepository.findById(id).get();
 
         if (request.getFullname() != null) passenger.setFullname(request.getFullname());
         if (request.getBirthdate() != null) {
-            // For birthdate, we need to format it to a string.
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
             String formattedDate = request.getBirthdate().format(formatter);
             passenger.setBirthdate(formattedDate);

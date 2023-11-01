@@ -23,7 +23,6 @@ public class CityController {
     @Autowired
     private CityService cityService;
 
-    // TODO: Change filter in the future  to frontend. With youtube video.
     @GetMapping()
     public List<City> getCities() {
         return this.cityService.getCities();

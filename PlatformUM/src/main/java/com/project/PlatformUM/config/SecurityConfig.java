@@ -32,7 +32,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(authRequest -> 
               authRequest
                 //! */ To permite all request in swagger add "/api/v1/**"
-                .requestMatchers("/auth/**", "/doc/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .requestMatchers("/auth/**", "/doc/swagger-ui/**", "/v3/api-docs/**", "/api/v1/**").permitAll()
                 .requestMatchers("/token/**").permitAll()
                 .anyRequest().authenticated()
                 )

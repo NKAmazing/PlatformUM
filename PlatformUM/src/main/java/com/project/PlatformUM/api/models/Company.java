@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.ArrayList;
 
+
 @Entity
 public class Company {
     @Id
@@ -31,7 +32,6 @@ public class Company {
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
     private List<Trip> trips = new ArrayList<>();
 
-    // Getters and setters of the class attributes
     public Long getId() {
         return id;
     }

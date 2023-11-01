@@ -5,7 +5,7 @@ import com.project.PlatformUM.api.repositories.ICompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional; //Devuelve nulo o algo.
+import java.util.Optional;
 import java.util.ArrayList;
 
 
