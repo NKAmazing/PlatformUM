@@ -20,7 +20,7 @@ Tools used in the development of the project:
 * Download Java JDK 17.0.6 or higher at  [```Oracle/Java-Download```](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
 * Download MySQL at [```MySQL/Download```](https://dev.mysql.com/downloads/installer/)
 * Clone the repository
-* Configure the enviroment variables
+* Configure the environment variables
 * Build packages of the workspace in the ```Execution and debugging``` section of Visual Studio Code or your respective IDE
 * Start the Spring Boot server with Debugging Mode
 * Using an API request orchestration platform like Postman or Insomnia, check the different API requests by using the API Url plus its respective endpoint
