@@ -1,6 +1,6 @@
 <h1 align="center"> PlatformUM </h1>
 
-![Covers Subjects](https://github.com/NKAmazing/PlatformUM_Frontend/assets/83615373/68aaf95f-dfce-4937-b517-c6f6157398d2)
+![Covers Subjects](https://github.com/NKAmazing/PlatformUM/assets/83615373/f8fc26c0-dae4-4677-87ad-8072c226f32d)
 
 ## About
 Backend service of the Platform UM bus travel app project. The service in question was created with Java, specifically with the Spring Boot framework in order to get a complete and functional REST API to be able to make a wide variety of requests.
